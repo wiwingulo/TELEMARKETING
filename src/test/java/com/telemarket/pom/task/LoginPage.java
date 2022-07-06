@@ -1,4 +1,4 @@
-package com.telemarket.pom.task.page;
+package com.telemarket.pom.task;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
