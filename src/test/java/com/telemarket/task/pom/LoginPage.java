@@ -15,16 +15,23 @@ public class LoginPage {
 	
 	@FindBy(xpath = "//span[@id='ui-id-1']")
 	protected WebElement txtLogin;
-	public String getTextLogin() {return txtLogin.getText();}
-	
+
+	public String getTextLogin() {
+		return txtLogin.getText();
+	}
+
 	@FindBy(id = "tl_login-1-51550_text")
 	protected WebElement inputUsername;
+	
 	@FindBy(id = "tl_login-1-51551_text")
 	protected WebElement inputPassword;
+	
 	@FindBy(xpath = "//span[normalize-space()='Sign In']")
 	protected WebElement btnSignIn;
+	
 	@FindBy(id = "tl_login-1-51550_finder")
 	protected WebElement btnGreenUsername;
+	
 	@FindBy(id = "tl_login-1-51551_finder")
 	protected WebElement btnGreenPassword;
 	

@@ -78,7 +78,7 @@ public class TLMKT_TestTaskNew {
 	}
 
 	@Test(priority = 1, dataProvider = "validData")
-	public void test_search_valid(String in) {
+	public void test_new_search_valid(String in) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -114,7 +114,7 @@ public class TLMKT_TestTaskNew {
 	}
 
 	@Test(priority = 2, dataProvider = "unusualData")
-	public void test_search_empty_and_unusual(String in) {
+	public void test_new_search_empty_and_unusual(String in) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -144,7 +144,7 @@ public class TLMKT_TestTaskNew {
 	}
 
 	@Test(priority = 3)
-	public void test_export_dataNew() {
+	public void test_new_export_data() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -177,23 +177,23 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		TaskNewPage newPage = mainPage.clickDataNew();
 		delay(1);
-		newPage.btnLastPagination.click();
+		newPage.clickLastPagination();
 		delay(1);
-		newPage.btnFirstPagination.click();
+		newPage.clickFirstPagination();
 		delay(1);
-		newPage.btnPage1.click();
+		newPage.clickPage1();
 		delay(1);
-		newPage.btnPage2.click();
+		newPage.clickPage2();
 		delay(1);
-		newPage.btnPage3.click();
+		newPage.clickPage3();
 		delay(1);
-		newPage.btnPage4.click();
+		newPage.clickPage4();
 		delay(1);
-		newPage.btnPage5.click();
+		newPage.clickPage5();
 		delay(1);
-		newPage.btnPage6.click();
+		newPage.clickPage6();
 		delay(1);
-		newPage.btnFirstPagination.click();
+		newPage.clickFirstPagination();
 		delay(1);
 		newPage.viewTable(10);
 		delay(1);
@@ -207,9 +207,9 @@ public class TLMKT_TestTaskNew {
 		delay(2);
 		newPage.searchDataNew("lumina");
 		delay(1);
-		newPage.topTable.click();
+		newPage.clickTopTable();
 		delay(1);
-		System.out.println(newPage.txtNewActivity.getText());
+		System.out.println(newPage.getTextNewActivity());
 		assertEquals(newPage.getTextNewActivity(),"Data Detail");
 		delay(2);
 		newPage.btnCloseNewActivity.click();
@@ -232,7 +232,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		newPage.searchDataNew("abadi");
 		delay(1);
-		newPage.topTable.click();
+		newPage.clickTopTable();
 		delay(1);
 		newPage.setPhone.click();
 		delay(1);
@@ -262,7 +262,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		newPage.searchDataNew("abadi");
 		delay(1);
-		newPage.topTable.click();
+		newPage.clickTopTable();
 		delay(1);
 		newPage.setPhone.click();
 		delay(1);
@@ -303,7 +303,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		newPage.searchDataNew("abadi");
 		delay(1);
-		newPage.topTable.click();
+		newPage.clickTopTable();
 		delay(1);
 		newPage.btnAddPhone.click();
 		delay(1);
@@ -348,7 +348,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		newPage.searchDataNew("abadi");
 		delay(1);
-		newPage.topTable.click();
+		newPage.clickTopTable();
 		delay(1);
 		newPage.setPhone.click();
 		delay(1);
