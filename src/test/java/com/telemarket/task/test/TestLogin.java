@@ -1,4 +1,4 @@
-package com.telemarket.pom.task;
+package com.telemarket.task.test;
 
 import static org.testng.Assert.assertEquals;
 
@@ -20,6 +20,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import com.telemarket.task.pom.LoginPage;
+import com.telemarket.task.pom.MainPage;
 
 public class TestLogin {
 	
