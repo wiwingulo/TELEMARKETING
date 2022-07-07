@@ -3,13 +3,35 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.telemarket.data.definitions.DataUploadDefinitions">
+      <class name="com.telemarket.test.DistributeDataTest">
         <methods>
+          <include name="clickStatusFollowupWithTwoBuketData"/>
+          <include name="clickStatusMailboxWithThreeBuketData"/>
+          <include name="clickStatusMailboxWithBuketDataNull"/>
+          <include name="clickStatusFollowupWithBuketDataNull"/>
+          <include name="clickStatusMailboxWithOneBuketData"/>
+          <include name="clickStatusMissCustomerWithBuketDataNull"/>
+          <include name="clickStatusFollowupWithOneBuketData"/>
+          <include name="clickStatusMailboxWithTwoBuketData"/>
+          <include name="clickStatusNoBodyPickUpWithThreeBuketData"/>
+          <include name="clickStatusMissCustomerWithThreeBuketData"/>
+          <include name="clickStatusMissCustomerWithTwoBuketData"/>
+          <include name="clickStatusInvalidNumberWithTwoBuketData"/>
+          <include name="clickStatusDisagreeWithOneBuketData"/>
+          <include name="clickStatusMissCustomerWithOneBuketData"/>
+          <include name="clickStatusNoBodyPickupWithBuketDataNull"/>
+          <include name="clickStatusInvalidNumberWithBuketDataNull"/>
+          <include name="clickStatusNoBodyPickUpWithTwoBuketData"/>
+          <include name="clickStatusInvalidNumberWithOneBuketData"/>
+          <include name="clickStatusDisagreeWithTwoBuketData"/>
+          <include name="clickStatusInvalidNumberWithThreeBuketData"/>
+          <include name="clickStatusDisagreeWithThreeBuketData"/>
+          <include name="clickStatusNoBodyPickUpWithOneBuketData"/>
           <include name="cekSession"/>
           <include name="init"/>
-          <include name="uploadDataExcel"/>
+          <include name="clickStatusFollowupWithThreeBuketData"/>
         </methods>
-      </class> <!-- com.telemarket.data.definitions.DataUploadDefinitions -->
+      </class> <!-- com.telemarket.test.DistributeDataTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
