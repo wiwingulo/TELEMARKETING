@@ -6,8 +6,8 @@
       <class name="com.telemarket.task.test.TLMKT_TestDataAll">
         <methods>
           <include name="cekSession"/>
+          <include name="test_all_search_combination" invocation-numbers="1"/>
           <include name="init"/>
-          <include name="test_all_search_empty_and_unusual" invocation-numbers="1 2 3"/>
           <include name="close"/>
         </methods>
       </class> <!-- com.telemarket.task.test.TLMKT_TestDataAll -->

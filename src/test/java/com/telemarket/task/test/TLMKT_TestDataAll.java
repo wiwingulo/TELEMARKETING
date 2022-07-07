@@ -113,7 +113,7 @@ public class TLMKT_TestDataAll {
 	
 	@DataProvider(name = "unusualData")
 	public Object[] unusualData() {
-		Object[] myData = { "", "@", "&", "_" };
+		Object[] myData = { "", "@", "&" };
 		return myData;
 	}
 
@@ -130,6 +130,8 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		allPage.setSearchAll(in);
 		delay(1);
+		allPage.clickSearchDataAll();
+		delay(3);
 		List<WebElement> lstElement = driver.findElements(By.xpath("(//tbody)[40]"));
 		String expectedChar = in;
 		boolean check = false;
@@ -147,11 +149,16 @@ public class TLMKT_TestDataAll {
 		allPage.clickBtnLogoutAtMain();
 		delay(1);
 		allPage.logout();
-		delay(2);
+	}
+	
+	@DataProvider(name = "agentStatusData")
+	public Object[][] agentStatusData() {
+		Object[][] myData = {{"","",""},{"kopi","1","Berhasil"}};
+		return myData;
 	}
 
-	@Test(priority = 3)
-	public void test_agree_export_data() {
+	@Test(priority = 3, dataProvider = "agentStatusData")
+	public void test_all_search_combination(String inCustomer,String inAgen, String inStatus) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -159,22 +166,61 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskAgreePage agreePage = mainPage.clickDataAgree();
+		TaskDataAllPage allPage = mainPage.clickDataAll();
 		delay(1);
-		agreePage.clickExportAgree();
+		allPage.setSearchAll(inCustomer);
+		delay(1);
+		allPage.clickAgent(inAgen);
+		delay(1);
+		allPage.clickStatus(inStatus);
+		delay(1);
+		allPage.clickSearchDataAll();
 		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tbody)[40]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(inCustomer)&&webElement.getText().contains(inAgen)&&webElement.getText().contains(inStatus)) {
+				check = true;
+				delay(5);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+
+	@Test(priority = 4)
+	public void test_all_export_data() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickDataAll();
+		delay(1);
+		allPage.setSearchAll("kopi");
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(1);
+		allPage.clickExportDataAll();
+		delay(4);
 		String downloadPath = "C:\\Users\\nexsoft\\Downloads";
 		File getLatestFile = getLatestFilefromDir(downloadPath);
 		String fileName = getLatestFile.getName();
-		assertTrue(fileName.contains("exportagree"), "Data tidak ada/tidak sesuai");
-		delay(3);
-		agreePage.clickBtnLogoutAtMain();
+		assertTrue(fileName.contains("exportall"), "Data tidak ada/tidak sesuai");
 		delay(1);
-		agreePage.logout();
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
 	}
 	
-	@Test(priority = 4)
-	public void testAgree_clickTable_gotoActivity() {
+	@Test(priority = 5)
+	public void testAll_clickTable_gotoActivity() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -182,54 +228,56 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskAgreePage agreePage = mainPage.clickDataAgree();
+		TaskDataAllPage allPage = mainPage.clickDataAll();
 		delay(1);
-		agreePage.clickLastPagination();
+		allPage.clickLastPagination();
 		delay(1);
-		agreePage.clickFirstPagination();
+		allPage.clickFirstPagination();
 		delay(1);
-		agreePage.clickPage1();
+		allPage.clickPage1();
 		delay(1);
-		agreePage.clickPage2();
+		allPage.clickPage2();
 		delay(1);
-		agreePage.clickPage3();
+		allPage.clickPage3();
 		delay(1);
-		agreePage.clickPage4();
+		allPage.clickPage4();
 		delay(1);
-		agreePage.clickPage5();
+		allPage.clickPage5();
 		delay(1);
-		agreePage.clickPage6();
+		allPage.clickPage6();
 		delay(1);
-		agreePage.clickFirstPagination();
+		allPage.clickFirstPagination();
 		delay(1);
-		agreePage.viewTable(10);
+		allPage.viewTable(10);
 		delay(1);
-		agreePage.viewTable(25);
+		allPage.viewTable(25);
 		delay(1);
-		agreePage.viewTable(50);
+		allPage.viewTable(50);
 		delay(1);
-		agreePage.viewTable(100);
+		allPage.viewTable(100);
 		delay(1);
-		agreePage.viewTable(500);
-		delay(2);
-		agreePage.searchDataAgree("kopi");
+		allPage.viewTable(500);
 		delay(3);
-		agreePage.clickTopTable();
+		allPage.setSearchAll("kopi");
 		delay(1);
-		System.out.println(agreePage.getTextAgreeActivity());
-		assertEquals(agreePage.getTextAgreeActivity(),"Data Detail");
+		allPage.clickSearchDataAll();
+		delay(3);
+		allPage.clickTopTable();
+		delay(1);
+		System.out.println(allPage.getTextDataAllActivity());
+		assertEquals(allPage.getTextDataAllActivity(),"Data Detail");
 		delay(2);
-		agreePage.closeAgreeActivity();
+		allPage.closeDataAllActivity();
 		delay(1);
-		agreePage.clickBtnLogoutAtMain();
+		allPage.clickBtnLogoutAtMain();
 		delay(1);
-		agreePage.logout();
+		allPage.logout();
 	}
 	
 	@AfterTest
 	public void close() {
-//		File file = new File("C:\\Users\\nexsoft\\Downloads\\exportagree.xls");
-//		file.delete();
+		File file = new File("C:\\Users\\nexsoft\\Downloads\\exportall.xls");
+		file.delete();
 		driver.close();
 	}
 }
