@@ -13,8 +13,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 import org.openqa.selenium.interactions.Actions;
 
 public class ReportCallTrack {
@@ -137,7 +135,6 @@ public class ReportCallTrack {
 
 	public void checkCallTrack2Agent(String xpathIsi) {
 		delay(3);
-
 		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
 
 		openDropDownAgent();
@@ -145,34 +142,50 @@ public class ReportCallTrack {
 		String agent2 = agentDian.getAttribute("value");
 
 		boolean checkData = false;
-		boolean finalCheckData = false;
-		boolean shouldNotExistData = true;
 		for (WebElement webElement : lstElement) {
 			String agent = webElement.getText();
-
+			checkData = false;
 			if (agent.equalsIgnoreCase(agent1)) {
 				checkData = true;
 			} else if (agent.equalsIgnoreCase(agent2)) {
 				checkData = true;
-			} else if (agent.isBlank()) {
-				break;
 			} else {
-				checkData = false;
+				break;
 			}
-			if (!agent.equalsIgnoreCase(agent1)) {
-				shouldNotExistData = false;
-			} else if (!agent.equalsIgnoreCase(agent2)) {
-				shouldNotExistData = false;
-				if (checkData = true) {
-					finalCheckData = true;
-				}
-				if (shouldNotExistData = false) {
-					finalCheckData = false;
-				}
+			if (agent.isBlank()) {
+				break;
 			}
-			assertTrue(finalCheckData);
-
 		}
+		assertTrue(checkData);
+	}
+	
+	public void checkCallTrack3Agent(String xpathIsi) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
+
+		openDropDownAgent();
+		String agent1 = agentCici.getAttribute("value");
+		String agent2 = agentDian.getAttribute("value");
+		String agent3 = agentRiska.getAttribute("value");
+
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String agent = webElement.getText();
+			checkData = false;
+			if (agent.equalsIgnoreCase(agent1)) {
+				checkData = true;
+			} else if (agent.equalsIgnoreCase(agent2)) {
+				checkData = true;
+			} else if (agent.equalsIgnoreCase(agent3)) {
+				checkData = true;
+			} else {
+				break;
+			}
+			if (agent.isBlank()) {
+				break;
+			}
+		}
+		assertTrue(checkData);
 	}
 
 }

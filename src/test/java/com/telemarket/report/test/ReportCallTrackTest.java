@@ -91,7 +91,7 @@ public class ReportCallTrackTest {
 		
 		reportCallTrack.getAllDropDown();
 		
-		reportCallTrack.setStartDate("12112015");
+		reportCallTrack.setStartDate("12112021");
 		reportCallTrack.setEndDate("12122022");
 		delay(1);
 		reportCallTrack.openDropDownAgent();
@@ -105,11 +105,11 @@ public class ReportCallTrackTest {
 		reportCallTrack.clickView();
 		
 		try {
-			reportCallTrack.checkCallTrack2Agent("//div[6]/table[1]/tbody[1]/tr/td[3]");
+			reportCallTrack.checkCallTrack2Agent("//tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[2]/div[3]/table[1]/tbody[1]/tr/td[3]");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			delay(3);
+			delay(5);
 			driver.close();
 		}
 	}
