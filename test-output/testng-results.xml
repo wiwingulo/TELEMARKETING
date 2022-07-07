@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results ignored="56" total="57" passed="1" failed="0" skipped="0">
+=======
+<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+>>>>>>> acfd7073a1247a04f0342903ebdc3da5c40a3aa8
   <reporter-output>
+    <line>
+      <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144720.png'height="450" width="1017"/>]]>
+    </line>
+    <line>
+      <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144725.png'height="450" width="1017"/>]]>
+    </line>
+    <line>
+      <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144728.png'height="450" width="1017"/>]]>
+    </line>
+    <line>
+      <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144731.png'height="450" width="1017"/>]]>
+    </line>
+    <line>
+      <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144737.png'height="450" width="1017"/>]]>
+    </line>
+    <line>
+      <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144746.png'height="450" width="1017"/>]]>
+    </line>
   </reporter-output>
+<<<<<<< HEAD
   <suite started-at="2022-07-07T13:06:21 ICT" name="Default suite" finished-at="2022-07-07T13:06:49 ICT" duration-ms="27755">
     <groups>
     </groups>
@@ -16,10 +39,93 @@
           </reporter-output>
         </test-method> <!-- cekSession -->
         <test-method signature="clickStatusSetujuWithThreeBuketData()[pri:57, instance:com.telemarket.test.DistributeDataTest@58cbafc2]" started-at="2022-07-07T13:06:28 ICT" name="clickStatusSetujuWithThreeBuketData" finished-at="2022-07-07T13:06:49 ICT" duration-ms="21184" status="PASS">
+=======
+  <suite started-at="2022-07-05T14:47:09 ICT" name="Default suite" finished-at="2022-07-05T14:47:49 ICT" duration-ms="40220">
+    <groups>
+    </groups>
+    <test started-at="2022-07-05T14:47:09 ICT" name="Default test" finished-at="2022-07-05T14:47:49 ICT" duration-ms="40220">
+      <class name="com.telemarket.pom.task.LoginTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:09 ICT" name="init" finished-at="2022-07-05T14:47:14 ICT" duration-ms="5380" status="PASS">
           <reporter-output>
           </reporter-output>
+        </test-method> <!-- init -->
+        <test-method is-config="true" signature="cekSession()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:14 ICT" name="cekSession" finished-at="2022-07-05T14:47:15 ICT" duration-ms="400" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cekSession -->
+        <test-method signature="test_login_username_valid_password_valid()[pri:1, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:15 ICT" name="test_login_username_valid_password_valid" finished-at="2022-07-05T14:47:23 ICT" duration-ms="8266" status="PASS">
+>>>>>>> acfd7073a1247a04f0342903ebdc3da5c40a3aa8
+          <reporter-output>
+            <line>
+              <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144720.png'height="450" width="1017"/>]]>
+            </line>
+          </reporter-output>
+<<<<<<< HEAD
         </test-method> <!-- clickStatusSetujuWithThreeBuketData -->
       </class> <!-- com.telemarket.test.DistributeDataTest -->
+=======
+        </test-method> <!-- test_login_username_valid_password_valid -->
+        <test-method is-config="true" signature="cekSession()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:23 ICT" name="cekSession" finished-at="2022-07-05T14:47:23 ICT" duration-ms="270" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cekSession -->
+        <test-method signature="test_login_username_valid_password_invalid()[pri:2, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:23 ICT" name="test_login_username_valid_password_invalid" finished-at="2022-07-05T14:47:26 ICT" duration-ms="2684" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144725.png'height="450" width="1017"/>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- test_login_username_valid_password_invalid -->
+        <test-method is-config="true" signature="cekSession()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:26 ICT" name="cekSession" finished-at="2022-07-05T14:47:26 ICT" duration-ms="294" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cekSession -->
+        <test-method signature="test_login_username_invalid_password_invalid()[pri:3, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:26 ICT" name="test_login_username_invalid_password_invalid" finished-at="2022-07-05T14:47:29 ICT" duration-ms="2637" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144728.png'height="450" width="1017"/>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- test_login_username_invalid_password_invalid -->
+        <test-method is-config="true" signature="cekSession()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:29 ICT" name="cekSession" finished-at="2022-07-05T14:47:29 ICT" duration-ms="232" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cekSession -->
+        <test-method signature="test_login_username_empty_password_empty()[pri:4, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:29 ICT" name="test_login_username_empty_password_empty" finished-at="2022-07-05T14:47:32 ICT" duration-ms="2786" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144731.png'height="450" width="1017"/>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- test_login_username_empty_password_empty -->
+        <test-method is-config="true" signature="cekSession()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:32 ICT" name="cekSession" finished-at="2022-07-05T14:47:32 ICT" duration-ms="439" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cekSession -->
+        <test-method signature="testLogin_usernameAndPasswordValid_clickGreenUsername()[pri:5, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:32 ICT" name="testLogin_usernameAndPasswordValid_clickGreenUsername" finished-at="2022-07-05T14:47:41 ICT" duration-ms="8299" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144737.png'height="450" width="1017"/>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- testLogin_usernameAndPasswordValid_clickGreenUsername -->
+        <test-method is-config="true" signature="cekSession()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:41 ICT" name="cekSession" finished-at="2022-07-05T14:47:41 ICT" duration-ms="266" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cekSession -->
+        <test-method signature="testLogin_usernameAndPasswordValid_clickGreenPassword()[pri:6, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:41 ICT" name="testLogin_usernameAndPasswordValid_clickGreenPassword" finished-at="2022-07-05T14:47:49 ICT" duration-ms="8021" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[<img src='file://D:\selenium-workspace\TLMKT\TELEMARKETING\hasilScreenshot\20220705_144746.png'height="450" width="1017"/>]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- testLogin_usernameAndPasswordValid_clickGreenPassword -->
+        <test-method is-config="true" signature="close()[pri:0, instance:com.telemarket.pom.task.LoginTest@79e4c792]" started-at="2022-07-05T14:47:49 ICT" name="close" finished-at="2022-07-05T14:47:49 ICT" duration-ms="166" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+      </class> <!-- com.telemarket.pom.task.LoginTest -->
+>>>>>>> acfd7073a1247a04f0342903ebdc3da5c40a3aa8
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
