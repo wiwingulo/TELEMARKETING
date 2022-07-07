@@ -91,7 +91,7 @@ public class OtherFunc {
 		return checkData;
 	}
 
-	public boolean verifDataAgentArray(String xpathIsi, String agentA[]) {
+	public boolean verifDataArray(String xpathIsi, String refArray[]) {
 		delay(3);
 
 		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
@@ -99,12 +99,12 @@ public class OtherFunc {
 		boolean checkData = false;
 		boolean finalCheckData = false;
 		for (WebElement webElement : lstElement) {
-			String agent = webElement.getText();
+			String isiElement = webElement.getText();
 
-			for (String i : agentA) {
-				if (agent.equalsIgnoreCase(i)) {
+			for (String i : refArray) {
+				if (isiElement.equalsIgnoreCase(i)) {
 					checkData = true;
-				} else if (agent.isBlank()) {
+				} else if (isiElement.isBlank()) {
 					break;
 				} else {
 					checkData = false;
@@ -119,20 +119,44 @@ public class OtherFunc {
 		return finalCheckData;
 	}
 	
-	public boolean verifDataAgentNotArray(String xpathIsi, String agent) {
+	public boolean verifDataNotArray(String xpathIsi, String refData) {
 		delay(3);
-
 		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
 
 		boolean checkData = false;
 		for (WebElement webElement : lstElement) {
-			String isiElmAgent = webElement.getText();
-
-			if (isiElmAgent.equalsIgnoreCase(agent)) {
+			String isiElement = webElement.getText();
+			System.out.println(isiElement);
+			if (isiElement.equalsIgnoreCase(refData)) {
 				checkData = true;
-			} else if (isiElmAgent.isBlank()) {
+			} 
+			else if (isiElement.isBlank()) {
 				break;
-			} else {
+			} 
+			else {
+				checkData = false;
+			}
+		}
+		assertTrue(checkData);
+
+		return checkData;
+	}
+	
+	public boolean verifDataContainsNotArray(String xpathIsi, String refData) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
+
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String isiElement = webElement.getText().toLowerCase();
+			System.out.println(isiElement);
+			if (isiElement.contains(refData.toLowerCase())) {
+				checkData = true;
+			} 
+//			else if (isiElement.isBlank()) {
+//				break;
+//			} 
+			else {
 				checkData = false;
 			}
 		}

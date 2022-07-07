@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.openqa.selenium.interactions.Actions;
 
-public class ReportCallTrack {
+public class ReportCallTrackPage {
 
 	protected WebDriver driver;
 	private WebDriverWait wait;
@@ -29,12 +29,10 @@ public class ReportCallTrack {
 	public WebElement agentDian;
 	@FindBy(xpath = "//input[@value='AGENT03']")
 	public WebElement agentRiska;
-	@FindBy(xpath = "//label[normalize-space()='Rika Nurul Khotimah']")
-	public WebElement agentRika;
-	@FindBy(xpath = "//label[normalize-space()='Cici Amelia']")
-	public WebElement agentCici;
-	@FindBy(xpath = "//input[@value='AGENT05']")
-	public WebElement agentAhmad;
+	@FindBy(xpath = "//label[normalize-space()='Katerina Evy Wurlianty']")
+	public WebElement agentKate;
+	@FindBy(xpath = "//label[normalize-space()='ridho']")
+	public WebElement agentRidho;
 
 	@FindBy(xpath = "//span[normalize-space()='View']")
 	public WebElement btnView;
@@ -51,7 +49,7 @@ public class ReportCallTrack {
 	@FindBy(xpath = "//select[@class='nikitaentry nikitacombolistselect']")
 	private WebElement selectAgent;
 
-	public ReportCallTrack(WebDriver driver) {
+	public ReportCallTrackPage(WebDriver driver) {
 		this.driver = driver;
 	}
 
@@ -63,7 +61,7 @@ public class ReportCallTrack {
 		}
 	}
 
-	public String getTxtReportActivity() {
+	public String getTxtReportCallTrack() {
 		return txtReportCallTrack.getAttribute("value");
 	}
 
@@ -72,18 +70,18 @@ public class ReportCallTrack {
 	}
 
 	public void click1DropDownAgent() {
-		agentCici.click();
+		agentRidho.click();
 	}
 
 	public void click2DropDownAgent() {
-		agentCici.click();
+		agentRidho.click();
 		agentRiska.click();
 	}
 
 	public void click3DropDownAgent() {
-		agentCici.click();
+		agentRidho.click();
 		agentRiska.click();
-		agentRika.click();
+		agentDian.click();
 	}
 
 	public void clickView() {
@@ -108,81 +106,68 @@ public class ReportCallTrack {
 
 	public boolean checkDataAgentCallTrack(String xpath, String agent) {
 		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
-		return other.verifDataAgentNotArray(xpath, agent);
-	}
-
-	public void scrollToAgentCici() {
-		je.executeScript("arguments[0].scrollIntoView(true);", agentCici);
-		agentCici.click();
+		return other.verifDataNotArray(xpath, agent);
 	}
 
 	public void getAllDropDown() {
-		Actions actions = new Actions(driver);
 		String agent = isiDropDown.getText();
 		String[] agentA = agent.split(" , ");
 		openDropDownAgent();
+		Actions actions = new Actions(driver);
 		actions.moveToElement(driver.findElement(By.xpath("//input[@value='REPORT CALL TRACK']"))).perform();
 		delay(3);
-		agentAhmad.click();
 		for (String i : agentA) {
-			if (!i.equals("Ahmad Fajri Saleh")) {
-				actions.moveToElement(driver.findElement(By.xpath("//label[normalize-space()='" + i + "']"))).perform();
-				driver.findElement(By.xpath("//label[normalize-space()='" + i + "']")).click();
-			}
+			actions.moveToElement(driver.findElement(By.xpath("//label[normalize-space()='" + i + "']"))).perform();
+			driver.findElement(By.xpath("//label[normalize-space()='" + i + "']")).click();
 		}
 		openDropDownAgent();
 	}
 
-	public void checkCallTrack2Agent(String xpathIsi) {
+	public void checkCallTrackAgentArray(String xpathIsi) {
 		delay(3);
 		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
-
-		openDropDownAgent();
-		String agent1 = agentCici.getAttribute("value");
-		String agent2 = agentDian.getAttribute("value");
-
+		String agent = isiDropDown.getText();
+		String[] agentA = agent.split(" , ");
+		System.out.println(agentA);
 		boolean checkData = false;
 		for (WebElement webElement : lstElement) {
-			String agent = webElement.getText();
-			checkData = false;
-			if (agent.equalsIgnoreCase(agent1)) {
-				checkData = true;
-			} else if (agent.equalsIgnoreCase(agent2)) {
-				checkData = true;
-			} else {
-				break;
-			}
-			if (agent.isBlank()) {
-				break;
+			String agentTabel = webElement.getText();
+			System.out.println(agentTabel);
+			for (String i : agentA) {
+				if (agentTabel.equalsIgnoreCase(i)) {
+					checkData = true;
+				} else {
+					checkData = false;
+				}
+				if (agentTabel.isBlank()) {
+					break;
+				}
 			}
 		}
 		assertTrue(checkData);
 	}
-	
-	public void checkCallTrack3Agent(String xpathIsi) {
+
+	public void checkCallTrackAllAgent(String xpathIsi) {
 		delay(3);
 		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
 
-		openDropDownAgent();
-		String agent1 = agentCici.getAttribute("value");
-		String agent2 = agentDian.getAttribute("value");
-		String agent3 = agentRiska.getAttribute("value");
-
+		String agent = isiDropDown.getText();
+		String[] agentA = agent.split(" , ");
+		System.out.println(agentA);
 		boolean checkData = false;
 		for (WebElement webElement : lstElement) {
-			String agent = webElement.getText();
-			checkData = false;
-			if (agent.equalsIgnoreCase(agent1)) {
-				checkData = true;
-			} else if (agent.equalsIgnoreCase(agent2)) {
-				checkData = true;
-			} else if (agent.equalsIgnoreCase(agent3)) {
-				checkData = true;
-			} else {
-				break;
-			}
-			if (agent.isBlank()) {
-				break;
+			String agentTabel = webElement.getText();
+			System.out.println(agentTabel);
+			for (String i : agentA) {
+				System.out.println(i);
+				if (agentTabel.equalsIgnoreCase(i)) {
+					checkData = true;
+				} else {
+					checkData = false;
+				}
+				if (agentTabel.isBlank()) {
+					break;
+				}
 			}
 		}
 		assertTrue(checkData);

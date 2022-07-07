@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.telemarket.usermanagement.pom.PhoneApprovePage;
+import com.telemarket.wa.pom.WhatsAppPage;
+
 public class MainPage {
 	
 	protected WebDriver driver;
@@ -42,6 +45,22 @@ public class MainPage {
 	public WebElement btnReportActivity;
 	@FindBy(xpath = "//span[normalize-space()='Report Call Track (NEW)']")
 	public WebElement btnReportCallTrack;
+	@FindBy(xpath = "//span[normalize-space()='Report Call Monitoring (NEW)']")
+	public WebElement btnReportCallMonitoring;
+	@FindBy(xpath = "//span[normalize-space()='Report Status Customer']")
+	public WebElement btnReportStatusCustomer;
+	
+	//dropdown Message WA
+	@FindBy(xpath = "(//h3[normalize-space()='Message WA'])[1]")
+	public WebElement dropdownWA;
+	@FindBy(xpath = "//span[normalize-space()='WA']")
+	public WebElement btnWA;
+	
+	//dropdown User Management
+	@FindBy(xpath = "(//h3[normalize-space()='User Management'])[1]")
+	public WebElement dropdownUserManagement;
+	@FindBy(xpath = "//span[normalize-space()='Phone Approve']")
+	public WebElement btnPhoneApprove;
 	
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
@@ -73,13 +92,49 @@ public class MainPage {
 		return reportActivityPage;
 	}
 	
-	public ReportCallTrack clickReportCallTrack() {
+	public ReportCallTrackPage clickReportCallTrack() {
 		dropdownReport.click();
 		btnReportCallTrack.click();
 		
-		ReportCallTrack reportCallTrack = PageFactory.initElements(driver, ReportCallTrack.class);
+		ReportCallTrackPage reportCallTrack = PageFactory.initElements(driver, ReportCallTrackPage.class);
 		
 		return reportCallTrack;
+	}
+	
+	public ReportCallMonitoringPage clickReportCallMonitoring() {
+		dropdownReport.click();
+		btnReportCallMonitoring.click();
+		
+		ReportCallMonitoringPage reportCallMonitoring = PageFactory.initElements(driver, ReportCallMonitoringPage.class);
+		
+		return reportCallMonitoring;
+	}
+	
+	public ReportStatusCustomerPage clickReportStatusCustomer() {
+		dropdownReport.click();
+		btnReportStatusCustomer.click();
+		
+		ReportStatusCustomerPage reportStatusCustomer = PageFactory.initElements(driver, ReportStatusCustomerPage.class);
+		
+		return reportStatusCustomer;
+	}
+	
+	public WhatsAppPage clickMessageWA() {
+		dropdownWA.click();
+		btnWA.click();
+		
+		WhatsAppPage whatsAppPage = PageFactory.initElements(driver, WhatsAppPage.class);
+		
+		return whatsAppPage;
+	}
+	
+	public PhoneApprovePage clickPhoneApprove() {
+		dropdownUserManagement.click();
+		btnPhoneApprove.click();
+		
+		PhoneApprovePage phoneApprovePage = PageFactory.initElements(driver, PhoneApprovePage.class);
+		
+		return phoneApprovePage;
 	}
 	
 }

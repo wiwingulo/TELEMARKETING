@@ -51,7 +51,7 @@ public class CalendarViewFunction {
 
 		int currentMonth;
 		int currentYear = Integer.valueOf(year);
-
+		
 		switch (month) {
 		case "January":
 			currentMonth = 1;
@@ -105,7 +105,6 @@ public class CalendarViewFunction {
 		else{
 			step = Math.abs(stepYear+stepMonth);
 		}
-		
 		if (currentYear < targetYear) {
 			for (int z = 0; z < step; z++) {
 				nextYearBtn.click();
@@ -115,7 +114,6 @@ public class CalendarViewFunction {
 				prevYearBtn.click();
 			}
 		}
-		
 		if(stepYear == 0) {
 			if (currentMonth < targetMonth) {
 				for (int z = 0; z < step; z++) {
@@ -129,9 +127,7 @@ public class CalendarViewFunction {
 		}
 		
 		int tanggalAngka = Integer.valueOf(tanggal);
-		
 		delay(2);
-
 		driver.findElement(By.xpath("(//a[normalize-space()='" + tanggalAngka + "'])[1]")).click();
 	}
 

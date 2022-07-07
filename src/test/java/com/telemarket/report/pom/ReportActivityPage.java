@@ -19,8 +19,16 @@ public class ReportActivityPage {
 	public WebElement agentAdmin;
 	@FindBy(xpath = "//label[normalize-space()='AGENT01']")
 	public WebElement agent01;
-	@FindBy(xpath = "//label[normalize-space()='AGENT010']")
-	public WebElement agent010;
+	@FindBy(xpath = "//label[normalize-space()='AGENT03']")
+	public WebElement agent03;
+	@FindBy(xpath = "//label[normalize-space()='AGENT07']")
+	public WebElement agent07;
+	@FindBy(xpath = "//label[normalize-space()='DEVELOPER']")
+	public WebElement agentDeveloper;
+	@FindBy(xpath = "//label[normalize-space()='ridho']")
+	public WebElement agentRidho;
+	@FindBy(xpath = "//label[normalize-space()='SPV01']")
+	public WebElement agentSPV01;
 	
 	@FindBy(xpath = "//span[normalize-space()='View']")
 	public WebElement btnView;
@@ -60,7 +68,17 @@ public class ReportActivityPage {
 	public void click3DropDownAgent() {
 		agentAdmin.click();
 		agent01.click();
-		agent010.click();
+		agent03.click();
+	}
+	
+	public void clickAllDropDownAgent() {
+		agentAdmin.click();
+		agent01.click();
+		agent03.click();
+		agent07.click();
+		agentDeveloper.click();
+		agentRidho.click();
+		agentSPV01.click();
 	}
 	
 	public void clickView() {
@@ -85,7 +103,7 @@ public class ReportActivityPage {
 	
 	public void checkDataAgentActivity(String xpath, String agentA[]) {
 		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
-		other.verifDataAgentArray(xpath, agentA);
+		other.verifDataArray(xpath, agentA);
 	}
 	
 	
