@@ -109,7 +109,7 @@ public class TLMKT_TestTaskNew {
 
 	@DataProvider(name = "unusualData")
 	public Object[] unusualData() {
-		Object[] myData = { "", "@", "&", "_" };
+		Object[] myData = { "", "@", "&" };
 		return myData;
 	}
 
@@ -247,6 +247,7 @@ public class TLMKT_TestTaskNew {
 		newPage.clickBtnLogoutAtMain();
 		delay(1);
 		newPage.logout();
+		delay(2);
 	}
 	
 	@Test(priority = 6)
@@ -282,6 +283,7 @@ public class TLMKT_TestTaskNew {
 		newPage.clickBtnLogoutAtMain();
 		delay(1);
 		newPage.logout();
+		delay(2);
 	}
 	
 	@DataProvider(name = "phoneData")

@@ -189,11 +189,11 @@ public class TLMKT_TestLogin {
 		delay(2);
 		assertEquals(folUp.getTextFollowUp(),"DATA THINKING");
 		delay(1);
-		TaskDataAllPage allPage = mainPage.clickDataAll();
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(2);
 		assertEquals(allPage.getTextDataAll(),"DATA ALL");
 		delay(1);
-		TaskFinalPage finalPage = mainPage.clickTaskAll();
+		TaskFinalPage finalPage = mainPage.clickTaskFinal();
 		delay(2);
 		assertEquals(finalPage.getTextFinal(),"DATA FINAL");
 		delay(1);

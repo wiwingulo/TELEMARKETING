@@ -49,6 +49,7 @@ public class LoginPage {
 		}
 		return PageFactory.initElements(driver, MainPage.class);
 	}
+	
 	public MainPage loginToMainPage() {
 		inputUsername.clear();
 		inputUsername.sendKeys("developer");

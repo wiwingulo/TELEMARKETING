@@ -105,6 +105,7 @@ public class TLMKT_TestTaskFollowUp {
 		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
 		followUpPage.logout();
+		delay(2);
 	}
 	
 	@DataProvider(name = "unusualData")
@@ -167,6 +168,7 @@ public class TLMKT_TestTaskFollowUp {
 		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
 		followUpPage.logout();
+		delay(2);
 	}
 	
 	@Test(priority = 4)

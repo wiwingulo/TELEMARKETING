@@ -19,7 +19,6 @@ import org.testng.annotations.Test;
 
 import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
-import com.telemarket.task.pom.TaskAgreePage;
 import com.telemarket.task.pom.TaskDataAllPage;
 
 public class TLMKT_TestDataAll {
@@ -86,7 +85,7 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskDataAllPage allPage = mainPage.clickDataAll();
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
 		assertEquals(allPage.getTextDataAll(),"DATA ALL");
 		delay(1);
@@ -107,8 +106,9 @@ public class TLMKT_TestDataAll {
 		assertTrue(check);
 		delay(1);
 		allPage.clickBtnLogoutAtMain();
-		delay(3);
+		delay(2);
 		allPage.logout();
+		delay(3);
 	}
 	
 	@DataProvider(name = "unusualData")
@@ -126,12 +126,12 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskDataAllPage allPage = mainPage.clickDataAll();
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
 		allPage.setSearchAll(in);
 		delay(1);
 		allPage.clickSearchDataAll();
-		delay(3);
+		delay(4);
 		List<WebElement> lstElement = driver.findElements(By.xpath("(//tbody)[40]"));
 		String expectedChar = in;
 		boolean check = false;
@@ -151,14 +151,14 @@ public class TLMKT_TestDataAll {
 		allPage.logout();
 	}
 	
-	@DataProvider(name = "agentStatusData")
-	public Object[][] agentStatusData() {
-		Object[][] myData = {{"","",""},{"kopi","1","Berhasil"}};
+	@DataProvider(name = "dataCust")
+	public Object[] dataCust() {
+		Object[] myData = {"","kopi"};
 		return myData;
 	}
 
-	@Test(priority = 3, dataProvider = "agentStatusData")
-	public void test_all_search_combination(String inCustomer,String inAgen, String inStatus) {
+	@Test(priority = 3, dataProvider="dataCust")
+	public void test_all_search_empty(String in) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -166,22 +166,221 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskDataAllPage allPage = mainPage.clickDataAll();
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
-		allPage.setSearchAll(inCustomer);
+		allPage.setSearchAll(in);
 		delay(1);
-		allPage.clickAgent(inAgen);
+		allPage.clickSearchDataAll();
 		delay(1);
-		allPage.clickStatus(inStatus);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(in)) {
+				check = true;
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+	
+	@Test(priority = 4)
+	public void test_all_search_agent() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String agen = "AGENT01";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.clickAgent(agen);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(2);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(agen)) {
+				check = true;
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+	
+	@Test(priority = 5)
+	public void test_all_search_status() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String status = "Berhasil";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.clickStatus(status);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(2);
+		List<WebElement> lstElement = driver.findElements(By.xpath("//tbody"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			System.out.println(webElement.getText());
+			if (webElement.getText().contains(status)) {
+				check = true;
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+	
+	@Test(priority = 6)
+	public void test_all_search_customer_agent() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String cust = "Kopi";
+		String agen = "AGENT01";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(cust);
+		allPage.clickAgent(agen);
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tbody)[40]"));
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
 		boolean check = false;
 		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(inCustomer)&&webElement.getText().contains(inAgen)&&webElement.getText().contains(inStatus)) {
+			if (webElement.getText().contains(agen) && webElement.getText().contains(agen)) {
 				check = true;
-				delay(5);
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+	
+	@Test(priority = 7)
+	public void test_all_search_customer_status() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String cust = "Kopi";
+		String status = "Berhasil";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(cust);
+		allPage.clickStatus(status);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(cust) && webElement.getText().contains(status)) {
+				check = true;
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+	
+	@Test(priority = 8)
+	public void test_all_search_agent_status() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String agen = "AGENT01";
+		String status = "Berhasil";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.clickAgent(agen);
+		allPage.clickStatus(status);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(agen) && webElement.getText().contains(status)) {
+				check = true;
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+	}
+	
+	@Test(priority = 9)
+	public void test_all_search_customer_agent_status() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String cust = "Cookies";
+		String agen = "AGENT01";
+		String status = "Setuju";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(cust);
+		allPage.clickAgent(agen);
+		allPage.clickStatus(status);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(cust) && webElement.getText().contains(agen) && webElement.getText().contains(status)) {
+				check = true;
+				delay(2);
 				break;
 			}
 		}
@@ -192,7 +391,7 @@ public class TLMKT_TestDataAll {
 		allPage.logout();
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 10)
 	public void test_all_export_data() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -201,7 +400,7 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskDataAllPage allPage = mainPage.clickDataAll();
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
 		allPage.setSearchAll("kopi");
 		delay(1);
@@ -219,7 +418,7 @@ public class TLMKT_TestDataAll {
 		allPage.logout();
 	}
 	
-	@Test(priority = 5)
+	@Test(priority = 11)
 	public void testAll_clickTable_gotoActivity() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -228,7 +427,7 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskDataAllPage allPage = mainPage.clickDataAll();
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
 		allPage.clickLastPagination();
 		delay(1);
@@ -268,6 +467,39 @@ public class TLMKT_TestDataAll {
 		assertEquals(allPage.getTextDataAllActivity(),"Data Detail");
 		delay(2);
 		allPage.closeDataAllActivity();
+		delay(1);
+		allPage.clickBtnLogoutAtMain();
+		delay(1);
+		allPage.logout();
+		delay(2);
+	}
+	
+	@Test(priority = 11)
+	public void test_all_search_clickGreen() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String cust = "Cookies";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskDataAllPage allPage = mainPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(cust);
+		delay(1);
+		allPage.clickGreenSearchAll();
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(cust) ) {
+				check = true;
+				delay(2);
+				break;
+			}
+		}
+		assertTrue(check);
 		delay(1);
 		allPage.clickBtnLogoutAtMain();
 		delay(1);

@@ -48,13 +48,15 @@ public class TaskDataAllPage extends MainPage {
 
 	public void clickAgent(String in) {
 		switch (in) {
-		case "1":
+		case "0":
+			break;
+		case "AGENT01":
 			selectAgent01DataAll.click();
 			break;
-		case "3":
+		case "AGENT03":
 			selectAgent03DataAll.click();
 			break;
-		case "7":
+		case "AGENT07":
 			selectAgent07DataAll.click();
 			break;
 		case "ridho":
@@ -100,6 +102,8 @@ public class TaskDataAllPage extends MainPage {
 	
 	public void clickStatus(String inString) {
 		switch (inString) {
+		case "0":
+			break;
 		case "Berhasil":
 			selectStatusBerhasil.click();
 			break;
