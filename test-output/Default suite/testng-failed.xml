@@ -3,16 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.telemarket.task.test.TLMKT_TestTaskFinal">
+      <class name="com.telemarket.task.test.TLMKT_TestTaskNew">
         <methods>
-          <include name="testFinal_clickTable_gotoActivity"/>
           <include name="init"/>
-          <include name="test_final_search_valid_greenBtn" invocation-numbers="0"/>
           <include name="cekSession"/>
+          <include name="testNewActivity_status_saveTolak" invocation-numbers="0"/>
           <include name="close"/>
-          <include name="test_final_search_valid" invocation-numbers="0"/>
         </methods>
-      </class> <!-- com.telemarket.task.test.TLMKT_TestTaskFinal -->
+      </class> <!-- com.telemarket.task.test.TLMKT_TestTaskNew -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

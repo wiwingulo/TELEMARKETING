@@ -98,11 +98,26 @@ public class MainPage {
 
 	/////// POPUP LOGOUT ----------------------------------------------------
 	@FindBy(xpath = "//span[@id='ui-id-21']")
-	public WebElement txtPopUpLogout;
+	protected WebElement txtPopUpLogout;
+	
+	public String getTextPopUpLogout() {
+		return txtPopUpLogout.getText();
+	}
+	
 	@FindBy(xpath = "//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick']")
-	public WebElement btnClosePopUpLogout;
+	protected WebElement btnClosePopUpLogout;
+	
+	public void clickClosePopUpLogout() {
+		btnClosePopUpLogout.click();
+	}
+	
 	@FindBy(xpath = "(//span[normalize-space()='TIDAK'])[1]")
 	public WebElement btnNoLogout;
+	
+	public void clickNOPopUpLogout() {
+		btnNoLogout.click();
+	}
+	
 	@FindBy(xpath = "(//span[normalize-space()='YA'])[1]")
 	protected WebElement btnYesLogout;
 
