@@ -52,9 +52,9 @@ public class AGN_LoginPage {
 
 	public AGN_MainPage loginToMainPage() {
 		inputUsername.clear();
-		inputUsername.sendKeys("developer");
+		inputUsername.sendKeys("agent01");
 		inputPassword.clear();
-		inputPassword.sendKeys("23");
+		inputPassword.sendKeys("1");
 		btnSignIn.click();
 		return PageFactory.initElements(driver, AGN_MainPage.class);
 	}

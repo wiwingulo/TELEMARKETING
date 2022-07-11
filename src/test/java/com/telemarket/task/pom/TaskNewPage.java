@@ -54,8 +54,7 @@ public class TaskNewPage extends MainPage {
 		topTable.click();
 	}
 
-	/////// ACTIVITY
-	/////// -----------------------------------------------------------------
+	/////// ACTIVITY -----------------------------------------------------------------
 	@FindBy(id = "tl_user_activity--53043_text")
 	protected WebElement txtNewActivity;
 

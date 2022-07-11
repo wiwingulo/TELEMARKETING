@@ -607,7 +607,7 @@ public class TLMKT_TestTaskNew {
 			String statusResult, String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
-		String nama = "Dakota Club";
+		String nama = "Lumina";
 		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
@@ -628,6 +628,64 @@ public class TLMKT_TestTaskNew {
 		TaskFinalPage finalPage = newPage.clickTaskFinal();
 		delay(1);
 		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(1);
+		verifDataNotArray("(//tr)[40]", nama, statusResult);
+		delay(10);
+		newPage.clickBtnLogoutAtMain();
+		delay(1);
+		newPage.logout();
+		delay(2);
+	}
+	
+	@DataProvider(name = "statusTolakWA")
+	public Object[][] statusTolakWA() {
+		Object[][] myData = { 
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Bersedia Memberikan Kontak Owner" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Fokus Online" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Tertarik, Tidak Memberi Alasan" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mengerti dan Tidak Bersedia Dijelaskan" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mengenal Tokko/Bukukas" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Rating/Comment Buruk Tokko di Sosial Media" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mau Dipersulit Menggunakan Tokko" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Terlalu Banyak Aplikasi atau Platform" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Memory Handphone Penuh" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Punya Android" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Lebih Nyaman Dengan Platform Selain Tokko" },
+//				{"Whatsapp","Tersambung","Diangkat","Tolak","Usaha Sudah Tutup/Bangkrut" },
+		};
+		return myData;
+	}
+
+	@Test(priority = 14, dataProvider = "statusTolakWA")
+	public void testNewActivity_status_saveTolak_whatsapp(String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "Lumina";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus(channel, status, statusCall, statusResult, reason);
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		TaskFinalPage finalPage = newPage.clickTaskFinal();
+		delay(1);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
 		delay(1);
 		verifDataNotArray("(//tr)[40]", nama, statusResult);
 		delay(10);

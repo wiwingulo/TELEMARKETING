@@ -29,8 +29,8 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 
 	@FindBy(id = "tl_data_new--52963_text")
 	protected WebElement inputSearchNew;
-
-	@FindBy(id = "52969_query")
+	
+	@FindBy(xpath = "//span[normalize-space()='Search']")
 	protected WebElement btnSearchNew;
 
 	public void searchDataNew(String inString) {
@@ -39,14 +39,7 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 		btnSearchNew.click();
 	}
 
-	@FindBy(xpath = "(//button[@id='52971_query'])[1]")
-	protected WebElement btnExportNew;
-
-	public void clickExportNew() {
-		btnExportNew.click();
-	}
-
-	@FindBy(xpath = "(//tr)[41]")
+	@FindBy(xpath = "(//tr)[26]")
 	protected WebElement topTable;
 
 	public void clickTopTable() {
@@ -76,7 +69,7 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 		btnCloseNewActivity.click();
 	}
 
-	@FindBy(xpath = "//option[@value='087796678733']")
+	@FindBy(xpath = "//option[@value='082228346305']")
 	public WebElement setPhone;
 
 	@FindBy(id = "53069_query")
@@ -98,41 +91,6 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 		inputPesanWA.clear();
 		inputPesanWA.sendKeys(inMsg);
 		btnSendWA.click();
-	}
-
-	@FindBy(id = "ui-id-17")
-	protected WebElement btnWA;
-
-	public void clickBtnWA() {
-		btnWA.click();
-	}
-
-	@FindBy(xpath = "//span[normalize-space()='WA']")
-	protected WebElement btnMessageWA;
-
-	public void clickBtnMessageWA() {
-		btnMessageWA.click();
-	}
-
-	@FindBy(xpath = "(//tr)[40]")
-	protected WebElement checkTopTableWA;
-
-	public String topTableWA() {
-		return checkTopTableWA.getText();
-	}
-
-	@FindBy(id = "tl_data_message--52167-cell-0-1")
-	protected WebElement checkMessageWA;
-
-	public String getTextMessageWA() {
-		return checkMessageWA.getText();
-	}
-
-	@FindBy(id = "tl_data_message--52167-cell-0-2")
-	protected WebElement checkPhoneWA;
-
-	public String getTextPhoneWA() {
-		return checkPhoneWA.getText();
 	}
 
 	/////// MULTI ADD PHONE -------------------
@@ -159,7 +117,7 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 	@FindBy(id = "ui-id-21")
 	protected WebElement txtKonfirmasi; // tak terpakai
 
-	@FindBy(xpath = "//p[normalize-space()='Data Berhasil Diajukan!']")
+	@FindBy(id = "ui-id-9")
 	public WebElement txtDataKonfirmasi;
 
 	public String getTextKonfirmasi() {
@@ -169,7 +127,7 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 	@FindBy(xpath = "//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick']")
 	public WebElement btnCloseKonfirmasi;
 
-	@FindBy(xpath = "(//button[@role='button'])[34]")
+	@FindBy(xpath = "//span[normalize-space()='OK']")
 	public WebElement btnSaveKonfirmasi;
 
 	/////// STATUS ACTIVITY ------------------------------------------------

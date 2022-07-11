@@ -20,7 +20,7 @@ public class AGN_MainPage {
 		return txtMainPage.getText();
 	}
 
-	@FindBy(xpath = "//span[normalize-space()='DEVELOPER']")
+	@FindBy(xpath = "//span[normalize-space()='Dian monica oktavia']")
 	protected WebElement btnLogoutMainPage;
 
 	public void clickBtnLogoutAtMain() {
@@ -28,7 +28,7 @@ public class AGN_MainPage {
 	}
 	
 	// GO TO TASK --------------------------------------
-	@FindBy(xpath = "//h3[@id='ui-id-15']")
+	@FindBy(xpath = "//h3[@id='ui-id-5']")
 	protected WebElement btnTask;
 	
 	public void clickTask() {
@@ -76,7 +76,7 @@ public class AGN_MainPage {
 	}
 
 	/////// POPUP AFTER LOGIN --------------------------------------------
-	@FindBy(xpath = "//span[@id='ui-id-21']")
+	@FindBy(id = "ui-id-9")
 	protected WebElement txtPopUpOnMainPage;
 
 	public String getTextPopUp() {
