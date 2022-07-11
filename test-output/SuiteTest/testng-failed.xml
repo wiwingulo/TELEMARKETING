@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [SuiteTest]">
+  <test thread-count="5" name="Task(failed)">
+    <classes>
+      <class name="com.telemarket.task.test.TLMKT_TestDataAll">
+        <methods>
+          <include name="test_all_search_agent_status"/>
+          <include name="close"/>
+          <include name="test_all_export_data"/>
+          <include name="test_all_search_customer_agent_status"/>
+          <include name="test_all_search_customer_status"/>
+          <include name="test_all_search_valid" invocation-numbers="1 2"/>
+          <include name="cekSession"/>
+          <include name="test_all_search_customer_agent"/>
+          <include name="init"/>
+          <include name="test_all_search_empty_and_unusual" invocation-numbers="0 1 2"/>
+          <include name="test_all_search_empty" invocation-numbers="0 1"/>
+          <include name="test_all_search_clickGreen"/>
+          <include name="test_all_search_status"/>
+          <include name="test_all_search_agent"/>
+          <include name="testAll_clickTable_gotoActivity"/>
+        </methods>
+      </class> <!-- com.telemarket.task.test.TLMKT_TestDataAll -->
+    </classes>
+  </test> <!-- Task(failed) -->
+</suite> <!-- Failed suite [SuiteTest] -->

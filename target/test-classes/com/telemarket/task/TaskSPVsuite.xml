@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="SuiteTest">
+	<test name="Task">
+		<classes>
+			<class name="com.telemarket.task.test.TLMKT_TestLogin"></class>
+			<class name="com.telemarket.task.test.TLMKT_TestTaskNew"></class>
+			<class name="com.telemarket.task.test.TLMKT_TestTaskAgree"></class>
+			<class name="com.telemarket.task.test.TLMKT_TestTaskFollowUp"></class>
+			<class name="com.telemarket.task.test.TLMKT_TestDataAll"></class>
+			<class name="com.telemarket.task.test.TLMKT_TestTaskFinal"></class>
+		</classes>
+	</test>
+</suite> 

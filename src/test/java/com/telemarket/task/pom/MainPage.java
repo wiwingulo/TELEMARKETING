@@ -19,17 +19,17 @@ public class MainPage {
 	public String getTextMainPage() {
 		return txtMainPage.getText();
 	}
-
+	
 	@FindBy(xpath = "//span[normalize-space()='DEVELOPER']")
 	protected WebElement btnLogoutMainPage;
-
+	
 	public void clickBtnLogoutAtMain() {
 		btnLogoutMainPage.click();
 	}
-
+	
 	@FindBy(xpath = "//h3[@id='ui-id-15']")
 	protected WebElement btnTask;
-
+	
 	public void clickTask() {
 		btnTask.click();
 	}
@@ -61,7 +61,7 @@ public class MainPage {
 	@FindBy(xpath = "(//button[@id='52858_query'])[1]")
 	protected WebElement btnDataAll;
 
-	public TaskDataAllPage clickDataAll() {
+	public TaskDataAllPage clickTaskAll() {
 		btnDataAll.click();
 		return PageFactory.initElements(driver, TaskDataAllPage.class);
 	}
@@ -69,7 +69,7 @@ public class MainPage {
 	@FindBy(xpath = "(//button[@id='52841_query'])[1]")
 	protected WebElement btnTaskFinal;
 	
-	public TaskFinalPage clickTaskAll() {
+	public TaskFinalPage clickTaskFinal() {
 		btnTaskFinal.click();
 		return PageFactory.initElements(driver, TaskFinalPage.class);
 	}
@@ -98,11 +98,26 @@ public class MainPage {
 
 	/////// POPUP LOGOUT ----------------------------------------------------
 	@FindBy(xpath = "//span[@id='ui-id-21']")
-	public WebElement txtPopUpLogout;
+	protected WebElement txtPopUpLogout;
+	
+	public String getTextPopUpLogout() {
+		return txtPopUpLogout.getText();
+	}
+	
 	@FindBy(xpath = "//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick']")
-	public WebElement btnClosePopUpLogout;
+	protected WebElement btnClosePopUpLogout;
+	
+	public void clickClosePopUpLogout() {
+		btnClosePopUpLogout.click();
+	}
+	
 	@FindBy(xpath = "(//span[normalize-space()='TIDAK'])[1]")
 	public WebElement btnNoLogout;
+	
+	public void clickNOPopUpLogout() {
+		btnNoLogout.click();
+	}
+	
 	@FindBy(xpath = "(//span[normalize-space()='YA'])[1]")
 	protected WebElement btnYesLogout;
 

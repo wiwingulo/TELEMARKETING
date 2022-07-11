@@ -64,12 +64,16 @@ public class TaskAgreePage extends MainPage{
 	/////// PAGINATION ---------------------------
 	@FindBy(xpath = "//option[@value='10']")
 	protected WebElement value10;
+	
 	@FindBy(xpath = "//option[@value='25']")
 	protected WebElement value25;
+	
 	@FindBy(xpath = "//option[@value='50']")
 	protected WebElement value50;
+	
 	@FindBy(xpath = "//option[@value='100']")
 	protected WebElement value100;
+	
 	@FindBy(xpath = "//option[@value='500']")
 	protected WebElement value500;
 
@@ -97,29 +101,40 @@ public class TaskAgreePage extends MainPage{
 
 	@FindBy(xpath = "(//td[contains(text(),'10')])[3]")
 	public WebElement check10;
+	
 	@FindBy(xpath = "(//td[contains(text(),'25')])[3]")
 	public WebElement check25;
+	
 	@FindBy(xpath = "(//td[contains(text(),'50')])[3]")
 	public WebElement check50;
+	
 	@FindBy(xpath = "(//td[contains(text(),'100')])[3]")
 	public WebElement check100;
+	
 	@FindBy(xpath = "(//td[contains(text(),'500')])[3]")
 	public WebElement check500;
 
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='<<'])[1]")
 	protected WebElement btnFirstPagination;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='>>'])[1]")
 	protected WebElement btnLastPagination;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='1'])[1]")
 	protected WebElement btnPage1;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='2'])[1]")
 	protected WebElement btnPage2;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='3'])[1]")
 	protected WebElement btnPage3;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='4'])[1]")
 	protected WebElement btnPage4;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='5'])[1]")
 	protected WebElement btnPage5;
+	
 	@FindBy(xpath = "(//a[@href='#'][normalize-space()='6'])[1]")
 	protected WebElement btnPage6;
 
