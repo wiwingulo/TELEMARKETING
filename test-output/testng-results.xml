@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="7" total="8" passed="1" failed="0" skipped="0">
+<testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-07-07T09:30:52 ICT" name="Default suite" finished-at="2022-07-07T09:31:06 ICT" duration-ms="14124">
+  <suite started-at="2022-07-11T15:12:50 ICT" name="Default suite" finished-at="2022-07-11T15:13:07 ICT" duration-ms="17246">
     <groups>
     </groups>
-    <test started-at="2022-07-07T09:30:52 ICT" name="Default test" finished-at="2022-07-07T09:31:06 ICT" duration-ms="14124">
-      <class name="com.telemarket.usermanagement.test.PhoneApproveTest">
-        <test-method is-config="true" signature="init()[pri:0, instance:com.telemarket.usermanagement.test.PhoneApproveTest@58cbafc2]" started-at="2022-07-07T09:30:52 ICT" name="init" finished-at="2022-07-07T09:30:57 ICT" duration-ms="4816" status="PASS">
+    <test started-at="2022-07-11T15:12:50 ICT" name="Default test" finished-at="2022-07-11T15:13:07 ICT" duration-ms="17246">
+      <class name="com.telemarket.report.test.ReportCallMonitoringTest">
+        <test-method is-config="true" signature="init()[pri:0, instance:com.telemarket.report.test.ReportCallMonitoringTest@117159c0]" started-at="2022-07-11T15:12:50 ICT" name="init" finished-at="2022-07-11T15:12:55 ICT" duration-ms="4787" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- init -->
-        <test-method signature="test_approveButton_1Checked()[pri:8, instance:com.telemarket.usermanagement.test.PhoneApproveTest@58cbafc2]" started-at="2022-07-07T09:30:57 ICT" name="test_approveButton_1Checked" finished-at="2022-07-07T09:31:06 ICT" duration-ms="9204" status="PASS">
+        <test-method signature="test_verif_monitoringALL_with_taskALL()[pri:2, instance:com.telemarket.report.test.ReportCallMonitoringTest@117159c0]" started-at="2022-07-11T15:12:55 ICT" name="test_verif_monitoringALL_with_taskALL" finished-at="2022-07-11T15:13:07 ICT" duration-ms="12340" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test_approveButton_1Checked -->
-      </class> <!-- com.telemarket.usermanagement.test.PhoneApproveTest -->
+        </test-method> <!-- test_verif_monitoringALL_with_taskALL -->
+      </class> <!-- com.telemarket.report.test.ReportCallMonitoringTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

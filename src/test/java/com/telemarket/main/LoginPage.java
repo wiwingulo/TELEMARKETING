@@ -1,4 +1,4 @@
-package com.telemarket.report.pom;
+package com.telemarket.main;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

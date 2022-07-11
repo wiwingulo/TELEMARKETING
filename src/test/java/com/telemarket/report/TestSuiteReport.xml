@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="TestSuiteReport">
+	<test name="Report">
+		<classes>
+			<class name="com.telemarket.report.test.ReportAgreeTest"></class>
+			<class name="com.telemarket.report.test.ReportActivityTest"></class>
+			<class name="com.telemarket.report.test.ReportCallTrackTest"></class>
+			<class name="com.telemarket.report.test.ReportCallMonitoringTest"></class>
+			<class name="com.telemarket.report.test.ReportStatusCustomerTest"></class>
+		</classes>
+	</test>
+</suite>

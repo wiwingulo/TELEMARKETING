@@ -1,4 +1,4 @@
-package com.telemarket.report.pom;
+package com.telemarket.utilities;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,8 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 public class CalendarViewFunction {
 
 	public WebDriver driver;
-	
-	public int vGlobal;
 	
 	@FindBy(xpath = "//span[@class='ui-datepicker-month']")
 	public WebElement txtGetMonth;
@@ -99,12 +97,17 @@ public class CalendarViewFunction {
 		int stepMonth = Math.abs(currentMonth-targetMonth);
 		
 		int step;
-		if(currentMonth < targetMonth) {
-			step = Math.abs(stepYear-stepMonth);
-		}
-		else{
+		
+		if(currentYear < targetYear && currentMonth < targetMonth) {
 			step = Math.abs(stepYear+stepMonth);
 		}
+		else if(currentYear > targetYear && currentMonth > targetMonth) {
+			step = Math.abs(stepYear+stepMonth);
+		}
+		else {
+			step = Math.abs(stepYear-stepMonth);
+		}
+
 		if (currentYear < targetYear) {
 			for (int z = 0; z < step; z++) {
 				nextYearBtn.click();

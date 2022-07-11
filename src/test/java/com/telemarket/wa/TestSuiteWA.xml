@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="TestSuiteWA">
+	<test name="WA">
+		<classes>
+			<class name="com.telemarket.wa.test.WhatsAppTest"></class>
+			<class name="com.telemarket.wa.test.WhatsAppUserTest"></class>
+		</classes>
+	</test>
+</suite>

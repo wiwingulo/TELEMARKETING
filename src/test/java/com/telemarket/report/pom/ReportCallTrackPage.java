@@ -13,6 +13,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.telemarket.utilities.CalendarViewFunction;
+import com.telemarket.utilities.OtherFunc;
+
 import org.openqa.selenium.interactions.Actions;
 
 public class ReportCallTrackPage {
@@ -123,54 +126,14 @@ public class ReportCallTrackPage {
 		openDropDownAgent();
 	}
 
-	public void checkCallTrackAgentArray(String xpathIsi) {
-		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
-		String agent = isiDropDown.getText();
-		String[] agentA = agent.split(" , ");
-		System.out.println(agentA);
-		boolean checkData = false;
-		for (WebElement webElement : lstElement) {
-			String agentTabel = webElement.getText();
-			System.out.println(agentTabel);
-			for (String i : agentA) {
-				if (agentTabel.equalsIgnoreCase(i)) {
-					checkData = true;
-				} else {
-					checkData = false;
-				}
-				if (agentTabel.isBlank()) {
-					break;
-				}
-			}
-		}
-		assertTrue(checkData);
+	public void checkCallTrackAgentArray(String xpath, String[] agentA) {
+		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+		other.verifDataOnlyInArray(xpath, agentA);
 	}
-
-	public void checkCallTrackAllAgent(String xpathIsi) {
-		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
-
-		String agent = isiDropDown.getText();
-		String[] agentA = agent.split(" , ");
-		System.out.println(agentA);
-		boolean checkData = false;
-		for (WebElement webElement : lstElement) {
-			String agentTabel = webElement.getText();
-			System.out.println(agentTabel);
-			for (String i : agentA) {
-				System.out.println(i);
-				if (agentTabel.equalsIgnoreCase(i)) {
-					checkData = true;
-				} else {
-					checkData = false;
-				}
-				if (agentTabel.isBlank()) {
-					break;
-				}
-			}
-		}
-		assertTrue(checkData);
+	
+	public void checkCallTrackAgentContains(String xpath, String agent) {
+		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+		other.verifDataContainsNotArray(xpath, agent);
 	}
 
 }

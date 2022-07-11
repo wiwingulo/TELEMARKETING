@@ -9,6 +9,8 @@ public class ReportStatusCustomerPage {
 
 	@FindBy(xpath = "//input[@value='REPORT LEVEL CUSTOMER']")
 	public WebElement txtReportStatusCustomer;
+	@FindBy(xpath = "//span[normalize-space()='Export']")
+	public WebElement btnExport;
 	
 	public ReportStatusCustomerPage(WebDriver driver) {
 		this.driver = driver;
@@ -24,5 +26,9 @@ public class ReportStatusCustomerPage {
 
 	public String getTxtReportStatusCustomer() {
 		return txtReportStatusCustomer.getAttribute("value");
+	}
+	
+	public void clickExport() {
+		btnExport.click();
 	}
 }

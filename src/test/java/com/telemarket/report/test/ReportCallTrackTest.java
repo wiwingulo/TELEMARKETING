@@ -1,6 +1,7 @@
 package com.telemarket.report.test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -12,14 +13,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Reporter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.telemarket.report.pom.LoginPage;
-import com.telemarket.report.pom.MainPage;
-import com.telemarket.report.pom.ReportCallMonitoringPage;
+import com.telemarket.main.LoginPage;
+import com.telemarket.main.MainPage;
 import com.telemarket.report.pom.ReportCallTrackPage;
+import com.telemarket.utilities.OtherFunc;
+
 
 public class ReportCallTrackTest {
 	protected WebDriver driver;
@@ -43,7 +46,7 @@ public class ReportCallTrackTest {
 	}
 
 	@Test(priority = 1)
-	public void test_goto_reportCallTrackPage() {
+	public void test_goto_reportCallTrackPagePage() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.login_goto_main_page("developer", "23");
 		delay(1);
@@ -64,22 +67,18 @@ public class ReportCallTrackTest {
 		delay(1);
 		mainPage.btnOKPopUpOnMainPage.click();
 		delay(1);
-		ReportCallTrackPage reportCallTrack = mainPage.clickReportCallTrack();
+		ReportCallTrackPage reportCallTrackPage = mainPage.clickReportCallTrack();
 		delay(1);
-		reportCallTrack.getAllDropDown();
+		reportCallTrackPage.getAllDropDown();
 		delay(1);
-		reportCallTrack.setStartDate("12112021");
-		reportCallTrack.setEndDate("12122022");
+		reportCallTrackPage.setStartDate("12112021");
+		reportCallTrackPage.setEndDate("12122022");
 		delay(1);
-		reportCallTrack.clickView();
-		try {
-			reportCallTrack.checkCallTrackAgentArray("//div[6]/table[1]/tbody[1]/tr/td[3]");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			delay(5);
-			driver.close();
-		}
+		reportCallTrackPage.clickView();
+		
+		reportCallTrackPage.checkCallTrackAgentContains("//div[2]/div[3]/table[1]/tbody[1]/tr/td[3]", "");
+		delay(5);
+		driver.close();
 	}
 
 	@Test(priority = 3)
@@ -90,24 +89,27 @@ public class ReportCallTrackTest {
 		delay(1);
 		mainPage.btnOKPopUpOnMainPage.click();
 		delay(1);
-		ReportCallTrackPage reportCallTrack = mainPage.clickReportCallTrack();
+		ReportCallTrackPage reportCallTrackPage = mainPage.clickReportCallTrack();
 		delay(1);
-		reportCallTrack.getAllDropDown();
-		reportCallTrack.setStartDate("12112021");
-		reportCallTrack.setEndDate("12122022");
+		reportCallTrackPage.getAllDropDown();
+		reportCallTrackPage.setStartDate("12112021");
+		reportCallTrackPage.setEndDate("12122022");
 		delay(1);
-		reportCallTrack.openDropDownAgent();
-		reportCallTrack.agentRidho.click();
+		reportCallTrackPage.openDropDownAgent();
+		reportCallTrackPage.agentRidho.click();
 		delay(2);
-		reportCallTrack.openDropDownAgent();
+		reportCallTrackPage.openDropDownAgent();
 		delay(1);
-		reportCallTrack.clickView();
+		reportCallTrackPage.clickView();
 
+		String agent = reportCallTrackPage.isiDropDown.getText();
+		String[] agentA = agent.split(" , ");
 		try {
-			reportCallTrack.checkDataAgentCallTrack("//div[6]/table[1]/tbody[1]/tr/td[3]", "ridho");
-		} catch (Exception e) {
-			e.printStackTrace();
+			reportCallTrackPage.checkCallTrackAgentArray("//div[2]/div[3]/table[1]/tbody[1]/tr/td[3]", agentA);
 		} finally {
+			OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+			String file = "<img src='file://" + other.screenShot() + "'height=\"450\" width=\"1017\"/>";
+			Reporter.log(file);
 			delay(3);
 			driver.close();
 		}
@@ -121,26 +123,28 @@ public class ReportCallTrackTest {
 		delay(1);
 		mainPage.btnOKPopUpOnMainPage.click();
 		delay(1);
-		ReportCallTrackPage reportCallTrack = mainPage.clickReportCallTrack();
+		ReportCallTrackPage reportCallTrackPage = mainPage.clickReportCallTrack();
 		delay(1);
-		reportCallTrack.getAllDropDown();
-		reportCallTrack.setStartDate("12112021");
-		reportCallTrack.setEndDate("12122022");
+		reportCallTrackPage.getAllDropDown();
+		reportCallTrackPage.setStartDate("12112021");
+		reportCallTrackPage.setEndDate("12122022");
 		delay(1);
-		reportCallTrack.openDropDownAgent();
-		reportCallTrack.agentRidho.click();
-		reportCallTrack.agentDian.click();
+		reportCallTrackPage.openDropDownAgent();
+		reportCallTrackPage.agentRidho.click();
+		reportCallTrackPage.agentDian.click();
 		delay(2);
-		reportCallTrack.openDropDownAgent();
+		reportCallTrackPage.openDropDownAgent();
 		delay(1);
-		reportCallTrack.clickView();
+		reportCallTrackPage.clickView();
 
+		String agent = reportCallTrackPage.isiDropDown.getText();
+		String[] agentA = agent.split(" , ");
 		try {
-			reportCallTrack.checkCallTrackAgentArray(
-					"//tbody[1]/tr[1]/td[2]/div[1]/div[1]/div[2]/div[3]/table[1]/tbody[1]/tr/td[3]");
-		} catch (Exception e) {
-			e.printStackTrace();
+			reportCallTrackPage.checkCallTrackAgentArray("//div[2]/div[3]/table[1]/tbody[1]/tr/td[3]", agentA);
 		} finally {
+			OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+			String file = "<img src='file://" + other.screenShot() + "'height=\"450\" width=\"1017\"/>";
+			Reporter.log(file);
 			delay(5);
 			driver.close();
 		}
@@ -154,20 +158,41 @@ public class ReportCallTrackTest {
 		delay(1);
 		mainPage.btnOKPopUpOnMainPage.click();
 		delay(1);
-		ReportCallTrackPage reportCallTrack = mainPage.clickReportCallTrack();
+		ReportCallTrackPage reportCallTrackPage = mainPage.clickReportCallTrack();
 		delay(1);
-		reportCallTrack.setStartDate("12112021");
-		reportCallTrack.setEndDate("12122022");
+		reportCallTrackPage.setStartDate("12112021");
+		reportCallTrackPage.setEndDate("12122022");
 		delay(1);
-		reportCallTrack.clickView();
+		reportCallTrackPage.clickView();
+		
+		String agent = reportCallTrackPage.isiDropDown.getText();
+		String[] agentA = agent.split(" , ");
 		try {
-			reportCallTrack.checkCallTrackAllAgent("//div[6]/table[1]/tbody[1]/tr/td[3]");
-		} catch (Exception e) {
-			e.printStackTrace();
+			reportCallTrackPage.checkCallTrackAgentArray("//div[2]/div[3]/table[1]/tbody[1]/tr/td[3]", agentA);
 		} finally {
+			OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+			String file = "<img src='file://" + other.screenShot() + "'height=\"450\" width=\"1017\"/>";
+			Reporter.log(file);
 			delay(5);
 			driver.close();
 		}
+	}
+	
+	@Test(priority = 6, enabled=false)
+	public void click_export() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.login_goto_main_page("developer", "23");
+		delay(1);
+		mainPage.btnOKPopUpOnMainPage.click();
+		
+		ReportCallTrackPage reportCallTrackPage = mainPage.clickReportCallTrack();
+		delay(1);
+		reportCallTrackPage.setStartDate("12112021");
+		reportCallTrackPage.setEndDate("12122022");
+		reportCallTrackPage.clickView();
+		reportCallTrackPage.clickExport();
+		delay(5);
+		driver.close();
 	}
 
 }

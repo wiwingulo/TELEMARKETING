@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.telemarket.report.pom.OtherFunc;
+import com.telemarket.utilities.OtherFunc;
 
 public class PhoneApprovePage {
 	protected WebDriver driver;
@@ -28,6 +28,8 @@ public class PhoneApprovePage {
 	public WebElement btnYes;
 	@FindBy(xpath = "//p[normalize-space()='DATA BERHASIL DI SETUJUI']")
 	public WebElement txtBerhasilApprove;
+	@FindBy(xpath = "//p[normalize-space()='DATA BERHASIL DI TOLAK']")
+	public WebElement txtBerhasilReject;
 	
 	public PhoneApprovePage(WebDriver driver) {
 		this.driver = driver;
@@ -57,6 +59,8 @@ public class PhoneApprovePage {
 	
 	public void clickReject() {
 		btnReject.click();
+		delay(1);
+		btnYes.click();
 	}
 	
 	public void sendFieldAgentSearch(String xpath, String isiSendKeys) {
@@ -71,14 +75,26 @@ public class PhoneApprovePage {
 		for (int i = 1; i <= jumlahCheck; i++) {
 			driver.findElement(By.xpath("//div[5]/div[6]/table[1]/tbody[1]/tr[" + i + "]/td[1]/table[1]/tbody[1]/tr[1]/td[2]/input[1]")).click();
 		}
+	}
+	
+	public void verifApprove(String checked) {
+		if (checked == "yes") {
+			assertEquals(txtBerhasilApprove.getText(), "DATA BERHASIL DI SETUJUI");
+		}
+		else if (checked == "no") {
+			assertNotEquals(txtBerhasilApprove.getText(), "DATA BERHASIL DI SETUJUI");
+		}
 		
 	}
 	
-	public void verifApproveNotChecked() {
-		assertNotEquals(txtBerhasilApprove.getText(), "DATA BERHASIL DI SETUJUI");
+	public void verifReject(String checked) {
+		if (checked == "yes") {
+			assertEquals(txtBerhasilReject.getText(), "DATA BERHASIL DI TOLAK");
+		}
+		else if (checked == "no") {
+			assertNotEquals(txtBerhasilReject.getText(), "DATA BERHASIL DI TOLAK");
+		}
+		
 	}
-	
-	public void verifApproveChecked() {
-		assertEquals(txtBerhasilApprove.getText(), "DATA BERHASIL DI SETUJUI");
-	}
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [TestSuiteWA]">
+  <test thread-count="5" name="WA(failed)">
+    <classes>
+      <class name="com.telemarket.wa.test.WhatsAppTest">
+        <methods>
+          <include name="init"/>
+          <include name="test_popupWA_NoMorePopUp"/>
+        </methods>
+      </class> <!-- com.telemarket.wa.test.WhatsAppTest -->
+      <class name="com.telemarket.wa.test.WhatsAppUserTest">
+        <methods>
+          <include name="init"/>
+          <include name="test_popupWA_NoMorePopUp"/>
+        </methods>
+      </class> <!-- com.telemarket.wa.test.WhatsAppUserTest -->
+    </classes>
+  </test> <!-- WA(failed) -->
+</suite> <!-- Failed suite [TestSuiteWA] -->

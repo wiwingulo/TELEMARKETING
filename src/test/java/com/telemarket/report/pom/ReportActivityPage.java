@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.telemarket.utilities.CalendarViewFunction;
+import com.telemarket.utilities.OtherFunc;
+
 
 
 public class ReportActivityPage {
@@ -103,7 +106,17 @@ public class ReportActivityPage {
 	
 	public void checkDataAgentActivity(String xpath, String agentA[]) {
 		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
-		other.verifDataArray(xpath, agentA);
+		other.verifDataOnlyInArray(xpath, agentA);
+	}
+	
+	public void checkDataAgentActivityContains(String xpath, String agent) {
+		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+		other.verifDataContainsNotArray(xpath, agent);
+	}
+	
+	public void checkActivityDate(String xpath, String startDate, String endDate) {
+		OtherFunc other = PageFactory.initElements(driver, OtherFunc.class);
+		other.verifActivityDate(xpath, startDate, endDate);
 	}
 	
 	

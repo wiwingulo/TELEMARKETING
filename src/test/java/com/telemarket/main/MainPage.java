@@ -1,11 +1,18 @@
-package com.telemarket.report.pom;
+package com.telemarket.main;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.telemarket.report.pom.ReportActivityPage;
+import com.telemarket.report.pom.ReportAgreePage;
+import com.telemarket.report.pom.ReportCallMonitoringPage;
+import com.telemarket.report.pom.ReportCallTrackPage;
+import com.telemarket.report.pom.ReportStatusCustomerPage;
+import com.telemarket.usermanagement.pom.MonitoringPage;
 import com.telemarket.usermanagement.pom.PhoneApprovePage;
+import com.telemarket.usermanagement.pom.RecordingPage;
 import com.telemarket.wa.pom.WhatsAppPage;
 
 public class MainPage {
@@ -23,7 +30,7 @@ public class MainPage {
 	@FindBy(xpath = "//font[normalize-space()='Tele Marketing']")
 	protected WebElement txtMainPage;
 	
-	@FindBy(xpath = "//span[normalize-space()='DEVELOPER']")
+	@FindBy(xpath = "(//span[@class='ui-button-text'])[1]")
 	public WebElement btnLogoutMainPage;
 	
 	// pop out logout
@@ -61,6 +68,10 @@ public class MainPage {
 	public WebElement dropdownUserManagement;
 	@FindBy(xpath = "//span[normalize-space()='Phone Approve']")
 	public WebElement btnPhoneApprove;
+	@FindBy(xpath = "//span[normalize-space()='Recording']")
+	public WebElement btnRecording;
+	@FindBy(xpath = "//span[normalize-space()='Monitoring']")
+	public WebElement btnMonitoring;
 	
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
@@ -135,6 +146,24 @@ public class MainPage {
 		PhoneApprovePage phoneApprovePage = PageFactory.initElements(driver, PhoneApprovePage.class);
 		
 		return phoneApprovePage;
+	}
+	
+	public RecordingPage clickRecording() {
+		dropdownUserManagement.click();
+		btnRecording.click();
+		
+		RecordingPage recordingPage = PageFactory.initElements(driver, RecordingPage.class);
+		
+		return recordingPage;
+	}
+	
+	public MonitoringPage clickMonitoring() {
+		dropdownUserManagement.click();
+		btnMonitoring.click();
+		
+		MonitoringPage monitoringPage = PageFactory.initElements(driver, MonitoringPage.class);
+		
+		return monitoringPage;
 	}
 	
 }

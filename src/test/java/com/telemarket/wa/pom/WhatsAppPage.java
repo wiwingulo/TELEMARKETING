@@ -12,7 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.telemarket.report.pom.OtherFunc;
+import com.telemarket.utilities.OtherFunc;
 
 public class WhatsAppPage {
 	protected WebDriver driver;
@@ -53,4 +53,6 @@ public class WhatsAppPage {
 		driver.findElement(By.xpath("//div[3]/div[1]/div[6]/table[1]/tbody[1]/tr/td[4]")).click();
 		assertNotEquals(txtMessagePopUpKedua.getText(), "[d] Activity");
 	}
+	
+	
 }
