@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.telemarket.task.test.TLMKT_TestTaskFollowUp">
+      <class name="com.telemarket.task.test.TLMKT_TestTaskNew">
         <methods>
-          <include name="close"/>
+          <include name="testNewActivity_status_invalid" invocation-numbers="1"/>
           <include name="init"/>
-          <include name="test_newActivity_phoneSelect_phoneAdd_valid"/>
           <include name="cekSession"/>
+          <include name="close"/>
         </methods>
-      </class> <!-- com.telemarket.task.test.TLMKT_TestTaskFollowUp -->
+      </class> <!-- com.telemarket.task.test.TLMKT_TestTaskNew -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

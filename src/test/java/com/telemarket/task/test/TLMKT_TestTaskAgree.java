@@ -20,14 +20,15 @@ import org.testng.annotations.Test;
 import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
 import com.telemarket.task.pom.TaskAgreePage;
+import com.telemarket.task.pom.TaskFinalPage;
 
 public class TLMKT_TestTaskAgree {
 	
 	protected WebDriver driver;
 	protected LoginPage loginPage;
 	protected MainPage mainPage;
-	
 	protected TaskAgreePage agreePage;
+	protected TaskFinalPage finalPage;
 
 	public void delay(int inInt) {
 		try {
@@ -52,6 +53,44 @@ public class TLMKT_TestTaskAgree {
 		}
 		return lastModifiedFile;
 	}
+	
+	public boolean verifyDataInTable(String xpath, String data) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpath));
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String isiElement = webElement.getText();
+			System.out.println(isiElement);
+			if (isiElement.contains(data)) {
+				checkData = true;
+			} else if (isiElement.isBlank()) {
+				break;
+			} else {
+				checkData = false;
+			}
+		}
+		assertTrue(checkData);
+		return checkData;
+	}
+	
+	public boolean verifyDataInTable(String xpath, String data, String data2) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpath));
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String isiElement = webElement.getText();
+			System.out.println(isiElement);
+			if (isiElement.contains(data) && isiElement.contains(data2)) {
+				checkData = true;
+			} else if (isiElement.isBlank()) {
+				break;
+			} else {
+				checkData = false;
+			}
+		}
+		assertTrue(checkData);
+		return checkData;
+	}
 
 	@BeforeTest
 	public void init() {
@@ -60,6 +99,7 @@ public class TLMKT_TestTaskAgree {
 		loginPage = new LoginPage(driver);
 		mainPage = new MainPage(driver);
 		agreePage = new TaskAgreePage(driver);
+		finalPage = new TaskFinalPage(driver);
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get(System.getProperty("url"));
@@ -222,6 +262,99 @@ public class TLMKT_TestTaskAgree {
 		delay(1);
 		agreePage.logout();
 	}
+	
+	@Test(priority = 5)
+	public void testAgree_activity_linkEmpty() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "ariebelly";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskAgreePage agreePage = mainPage.clickDataAgree();
+		delay(1);
+		agreePage.searchDataAgree(nama);
+		delay(1);
+		agreePage.clickTopTable();
+		delay(1);
+		agreePage.setLinkActivity("");
+		delay(1);
+		agreePage.clickUpdateLink();
+		delay(1);
+		agreePage.clickOKInformasiActivity();
+		delay(2);
+		TaskFinalPage finalPage = agreePage.clickTaskFinal();
+		delay(1);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath("//tbody"));
+		boolean check = false;
+		for (WebElement webElement : lstElement) {
+			if (webElement.getText().contains(nama)) {
+				check = true;
+				delay(3);
+				break;
+			}
+		}
+		assertTrue(check);
+		delay(1);
+		agreePage.clickBtnLogoutAtMain();
+		delay(1);
+		agreePage.logout();
+	}
+	
+	@DataProvider(name = "dataLink")
+	public Object[][] dataLink() {
+		Object[][] myData = { 
+//				{"","initautan"}, 
+//				{"pakndutofficial","initautan.com"}, 
+//				{"_rifafashion", "www.initautan.com"},
+//				{"shabil.official","http://www.initautan.com"}, 
+				{"chrisedo_chiva","https://www.initautan.com"}
+				};
+		return myData;
+	}
+	
+	@Test(priority = 6, dataProvider = "dataLink")
+	public void testAgree_activity_link(String nama, String inLink) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskAgreePage agreePage = mainPage.clickDataAgree();
+		delay(1);
+		agreePage.searchDataAgree(nama);
+		delay(1);
+		agreePage.clickTopTable();
+		delay(1);
+		agreePage.setLinkActivity(inLink);
+		delay(1);
+		agreePage.clickUpdateLink();
+		delay(3);
+		agreePage.clickOKInformasiActivity();
+		delay(3);
+		TaskFinalPage finalPage = agreePage.clickTaskFinal();
+		delay(2);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(3);
+		verifyDataInTable("(//tr)[40]", nama, inLink);
+		delay(1);
+		agreePage.clickBtnLogoutAtMain();
+		delay(1);
+		agreePage.logout();
+		delay(2);
+	}
+	
+	
 	
 	@AfterTest
 	public void close() {

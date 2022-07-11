@@ -95,7 +95,7 @@ public class TaskFollowUpPage extends MainPage{
 		btnSendWA.click();
 	}
 	
-	@FindBy(id = "ui-id-7")
+	@FindBy(id = "ui-id-17")
 	protected WebElement btnMessageWA;
 	
 	public void clickMessageWA() {

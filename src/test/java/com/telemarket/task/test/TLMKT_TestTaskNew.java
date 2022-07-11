@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
 import com.telemarket.task.pom.TaskAgreePage;
+import com.telemarket.task.pom.TaskDataAllPage;
 import com.telemarket.task.pom.TaskFinalPage;
 import com.telemarket.task.pom.TaskFollowUpPage;
 import com.telemarket.task.pom.TaskNewPage;
@@ -58,7 +59,7 @@ public class TLMKT_TestTaskNew {
 	}
 	
 
-	public boolean verifDataNotArray(String xpathIsi, String refDataSatu, String refDataDua) {
+	public boolean verifyDataInTable(String xpathIsi, String refDataSatu, String refDataDua) {
 		delay(3);
 		List<WebElement> lstElement = driver.findElements(By.xpath(xpathIsi));
 
@@ -449,7 +450,7 @@ public class TLMKT_TestTaskNew {
 
 	@DataProvider(name = "statusAct")
 	public Object[][] statusAct() {
-		Object[][] myData = { { "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" } };
+		Object[][] myData = { { "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" }		};
 		return myData;
 	}
 
@@ -465,7 +466,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		TaskNewPage newPage = mainPage.clickDataNew();
 		delay(1);
-		newPage.searchDataNew("makananminuman231");
+		newPage.searchDataNew("Grand Am");
 		delay(1);
 		newPage.clickTopTable();
 		delay(1);
@@ -488,7 +489,18 @@ public class TLMKT_TestTaskNew {
 	@DataProvider(name = "statusAgree")
 	public Object[][] statusAgree() {
 		Object[][] myData = { { "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
-				{ "Call", "Tersambung", "Diangkat", "Setuju", "Follow Up Download" } };
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+				{ "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
+//				{ "Call", "Tersambung", "Diangkat", "Setuju", "Follow Up Download" } 
+				};
 		return myData;
 	}
 
@@ -497,7 +509,7 @@ public class TLMKT_TestTaskNew {
 			String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
-		String nama = "Dakota Club";
+		String nama = "Grand Am";
 		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
@@ -533,6 +545,7 @@ public class TLMKT_TestTaskNew {
 		newPage.clickBtnLogoutAtMain();
 		delay(1);
 		newPage.logout();
+		delay(2);
 	}
 	
 	@DataProvider(name = "statusFollowUp")
@@ -575,7 +588,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		followUpPage.searchDataFollowUp(nama);
 		delay(1);
-		verifDataNotArray("(//tr)[41]", nama, statusResult);
+		verifyDataInTable("(//tr)[41]", nama, statusResult);
 		delay(10);
 		newPage.clickBtnLogoutAtMain();
 		delay(1);
@@ -631,7 +644,7 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		finalPage.clickSearchFinal();
 		delay(1);
-		verifDataNotArray("(//tr)[40]", nama, statusResult);
+		verifyDataInTable("(//tr)[40]", nama, statusResult);
 		delay(10);
 		newPage.clickBtnLogoutAtMain();
 		delay(1);
@@ -687,12 +700,136 @@ public class TLMKT_TestTaskNew {
 		delay(1);
 		finalPage.clickSearchFinal();
 		delay(1);
-		verifDataNotArray("(//tr)[40]", nama, statusResult);
+		verifyDataInTable("(//tr)[40]", nama, statusResult);
 		delay(10);
 		newPage.clickBtnLogoutAtMain();
 		delay(1);
 		newPage.logout();
 		delay(2);
+	}
+	
+	@Test(priority = 15)
+	public void testNewActivity_status_resultBerhasil_reasonBerhasil() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "Ascender";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus("Call","Tersambung","Diangkat","Berhasil","Berhasil");
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		TaskFinalPage finalPage = newPage.clickTaskFinal();
+		delay(1);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(1);
+		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		delay(10);
+		newPage.clickBtnLogoutAtMain();
+		delay(1);
+		newPage.logout();
+		delay(2);
+	}
+	
+	@Test(priority = 16)
+	public void testNewActivity_statusWA_resultBerhasil_reasonBerhasil() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "Ascender";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus("Whatsapp","Tersambung","Diangkat","Berhasil","Berhasil");
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		TaskFinalPage finalPage = newPage.clickTaskFinal();
+		delay(1);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(1);
+		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		delay(10);
+		newPage.clickBtnLogoutAtMain();
+		delay(1);
+		newPage.logout();
+		delay(2);
+	}
+	
+	@DataProvider(name = "statusInvalid")
+	public Object[][] statusInvalid() {
+		Object[][] myData = { 
+//				{"Grand Am","Call","Tersambung","Diangkat","Tidak Berhasil","Tidak Berhasil" },
+//				{"Grand Am","Call","Tersambung","Salah Sambung","Salah Sambung","Salah Sambung" },
+//				{"Grand Am","Call","Tersambung","Tidak Diangkat","Tidak Diangkat","Tidak Diangkat" },
+//				{"Grand Am","Call","Tidak Tersambung","Nomer Salah","Nomer Salah","Nomer Salah" },
+//				{"Grand Am","Call","Tidak Tersambung","Mailbox","Mailbox","Mailbox" },
+//				{"Grand Am","Call","Tidak Tersambung","Invalid Number","Tidak Ada Nomor Telepon","Tidak Ada Nomor Telepon" },
+				{"Grand Am","Call","Tidak Tersambung","Telepon Not Register","Tidak Terdaftar","Tidak Terdaftar" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 17, dataProvider="statusInvalid")
+	public void testNewActivity_status_invalid(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		TaskDataAllPage allPage = newPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(nama);
+		delay(1);
+		allPage.clickStatus(reason);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(1);
+		verifyDataInTable("(//tr)[43]", nama, reason);
+		delay(5);
+		newPage.clickBtnLogoutAtMain();
+		delay(1);
+		newPage.logout();
+		delay(3);
 	}
 
 	@AfterTest

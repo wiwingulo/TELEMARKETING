@@ -60,6 +60,40 @@ public class TaskAgreePage extends MainPage{
 		btnCloseAgreeActivity.click();
 	}
 	
+	@FindBy(id = "tl_user_activity_agree-1212-52891_text")
+	protected WebElement setLink;
+	
+	public void setLinkActivity(String in) {
+		setLink.sendKeys(in);
+	}
+	
+	@FindBy(xpath = "//span[normalize-space()='UPDATE']")
+	protected WebElement btnUpdateLinkActivity;
+	
+	public void clickUpdateLink() {
+		btnUpdateLinkActivity.click();
+	}
+	
+	@FindBy(id = "ui-id-21")
+	protected WebElement txtInformasi;
+	
+	public String getTextInformasi() {
+		return txtInformasi.getText();
+	}
+	
+	@FindBy(id = "//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick']")
+	protected WebElement btnCloseInformasiActivity;
+	
+	public void clickCloseInformasiActivity() {
+		btnCloseInformasiActivity.click();
+	}
+	
+	@FindBy(xpath = "//span[normalize-space()='OK']")
+	protected WebElement btnOKInformasiActivity;
+	
+	public void clickOKInformasiActivity() {
+		btnOKInformasiActivity.click();
+	}
 	
 	/////// PAGINATION ---------------------------
 	@FindBy(xpath = "//option[@value='10']")

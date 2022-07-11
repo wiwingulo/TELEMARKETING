@@ -107,31 +107,31 @@ public class TaskDataAllPage extends MainPage {
 		case "Berhasil":
 			selectStatusBerhasil.click();
 			break;
-		case "FollowUp":
+		case "Follow Up":
 			selectStatusFollowUp.click();
 			break;
 		case "Mailbox":
 			selectStatusMailbox.click();
 			break;
-		case "NomerSalah":
+		case "Nomer Salah":
 			selectStatusNomerSalah.click();
 			break;
-		case "SalahSambung":
+		case "Salah Sambung":
 			selectStatusSalahSambung.click();
 			break;
 		case "Setuju":
 			selectStatusSetuju.click();
 			break;
-		case "TidakAdaNomorTelepon":
+		case "Tidak Ada Nomor Telepon":
 			selectStatusTidakAdaNomorTelepon.click();
 			break;
-		case "TidakBerhasil":
+		case "Tidak Berhasil":
 			selectStatusTidakBerhasil.click();
 			break;
-		case "TidakDiangkat":
+		case "Tidak Diangkat":
 			selectStatusTidakDiangkat.click();
 			break;
-		case "TidakTerdaftar":
+		case "Tidak Terdaftar":
 			selectStatusTidakTerdaftar.click();
 			break;
 		case "Tolak":

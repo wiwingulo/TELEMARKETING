@@ -21,15 +21,15 @@ import org.testng.annotations.Test;
 import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
 import com.telemarket.task.pom.TaskAgreePage;
-import com.telemarket.task.pom.TaskFinalPage;
+import com.telemarket.task.pom.TaskDataAllPage;
 import com.telemarket.task.pom.TaskFollowUpPage;
 
 public class TLMKT_TestTaskFollowUp {
 	protected WebDriver driver;
 	protected LoginPage loginPage;
 	protected MainPage mainPage;
-	
 	protected TaskFollowUpPage followUpPage;
+	protected TaskDataAllPage allPage;
 
 	public void delay(int inInt) {
 		try {
@@ -73,6 +73,25 @@ public class TLMKT_TestTaskFollowUp {
 		assertTrue(checkData);
 		return checkData;
 	}
+	
+	public boolean verifyDataInTable(String xpath, String data, String data2) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpath));
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String isiElement = webElement.getText();
+			System.out.println(isiElement);
+			if (isiElement.contains(data) && isiElement.contains(data2)) {
+				checkData = true;
+			} else if (isiElement.isBlank()) {
+				break;
+			} else {
+				checkData = false;
+			}
+		}
+		assertTrue(checkData);
+		return checkData;
+	}
 
 	@BeforeTest
 	public void init() {
@@ -81,6 +100,7 @@ public class TLMKT_TestTaskFollowUp {
 		loginPage = new LoginPage(driver);
 		mainPage = new MainPage(driver);
 		followUpPage = new TaskFollowUpPage(driver);
+		allPage = new TaskDataAllPage(driver);
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get(System.getProperty("url"));
@@ -429,18 +449,17 @@ public class TLMKT_TestTaskFollowUp {
 		followUpPage.clickTopTable();
 		delay(1);
 		followUpPage.inputDataWA(phone, msg);
+		delay(2);
+		followUpPage.closeFollowUpActivity();
 		delay(1);
-		followUpPage.clickCloseActivityNew();
+		followUpPage.clickMessageWA();
 		delay(1);
-		followUpPage.clickBtnWA();
+		followUpPage.clickWA();
 		delay(1);
-		followUpPage.clickBtnMessageWA();
-		delay(1);
-		followUpPage.topTableWA();
 		// assert
 		assertEquals(followUpPage.getTextMessageWA(), msg);
 		assertEquals(followUpPage.getTextPhoneWA(), phone);
-		delay(1);
+		delay(2);
 		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
 		followUpPage.logout();
@@ -463,26 +482,26 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskNewPage newPage = mainPage.clickDataNew();
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
 		delay(1);
-		newPage.searchDataNew("makananminuman231");
+		followUpPage.searchDataFollowUp("obby_kue");
 		delay(1);
-		newPage.clickTopTable();
+		followUpPage.clickTopTable();
 		delay(1);
-		newPage.clickStatus(channel, status, statusCall, statusResult, reason);
+		followUpPage.clickStatus(channel, status, statusCall, statusResult, reason);
 		delay(2);
-		newPage.clickSubmit();
+		followUpPage.clickSubmit();
 		delay(1);
-		assertEquals(newPage.getTextPemberitahuan(), "Apakah Anda Yakin?");
+		assertEquals(followUpPage.getTextPemberitahuan(), "Apakah Anda Yakin?");
 		delay(2);
-//		newPage.clickClosePemberitahuan();
-		newPage.clickNOPemberitahuan();
+//		followUpPage.clickClosePemberitahuan();
+		followUpPage.clickNOPemberitahuan();
 		delay(1);
-		newPage.clickCloseActivityNew();
+		followUpPage.closeFollowUpActivity();;
 		delay(1);
-		newPage.clickBtnLogoutAtMain();
+		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
-		newPage.logout();
+		followUpPage.logout();
 	}
 
 	@DataProvider(name = "statusAgree")
@@ -503,19 +522,19 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskNewPage newPage = mainPage.clickDataNew();
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
 		delay(1);
-		newPage.searchDataNew(nama);
+		followUpPage.searchDataFollowUp(nama);
 		delay(1);
-		newPage.clickTopTable();
+		followUpPage.clickTopTable();
 		delay(1);
-		newPage.clickStatus(channel, status, statusCall, statusResult, reason);
+		followUpPage.clickStatus(channel, status, statusCall, statusResult, reason);
 		delay(1);
-		newPage.clickSubmit();
+		followUpPage.clickSubmit();
 		delay(3);
-		newPage.clickYESPemberitahuan();
+		followUpPage.clickYESPemberitahuan();
 		delay(3);
-		TaskAgreePage agreePage = newPage.clickDataAgree();
+		TaskAgreePage agreePage = followUpPage.clickDataAgree();
 		delay(1);
 		agreePage.searchDataAgree(nama);
 		delay(1);
@@ -530,9 +549,9 @@ public class TLMKT_TestTaskFollowUp {
 		}
 		assertTrue(check);
 		delay(1);
-		newPage.clickBtnLogoutAtMain();
+		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
-		newPage.logout();
+		followUpPage.logout();
 	}
 	
 	@DataProvider(name = "statusFollowUp")
@@ -559,27 +578,25 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskNewPage newPage = mainPage.clickDataNew();
-		delay(1);
-		newPage.searchDataNew(nama);
-		delay(1);
-		newPage.clickTopTable();
-		delay(1);
-		newPage.clickStatus(channel, status, statusCall, statusResult, reason);
-		delay(3);
-		newPage.clickSubmit();
-		delay(1);
-		newPage.clickYESPemberitahuan();
-		delay(1);
-		TaskFollowUpPage followUpPage = newPage.clickDataFollowUp();
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
 		delay(1);
 		followUpPage.searchDataFollowUp(nama);
 		delay(1);
-		verifDataNotArray("(//tr)[41]", nama, statusResult);
-		delay(10);
-		newPage.clickBtnLogoutAtMain();
+		followUpPage.clickTopTable();
 		delay(1);
-		newPage.logout();
+		followUpPage.clickStatus(channel, status, statusCall, statusResult, reason);
+		delay(3);
+		followUpPage.clickSubmit();
+		delay(1);
+		followUpPage.clickYESPemberitahuan();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		verifyDataInTable("(//tr)[41]", nama, statusResult);
+		delay(10);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
 		delay(2);
 	}
 	
@@ -607,35 +624,35 @@ public class TLMKT_TestTaskFollowUp {
 			String statusResult, String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
-		String nama = "Lumina";
+		String nama = "nasi_tumpeng_palembang";
 		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskNewPage newPage = mainPage.clickDataNew();
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
 		delay(1);
-		newPage.searchDataNew(nama);
+		followUpPage.searchDataFollowUp(nama);
 		delay(1);
-		newPage.clickTopTable();
+		followUpPage.clickTopTable();
 		delay(1);
-		newPage.clickStatus(channel, status, statusCall, statusResult, reason);
+		followUpPage.clickStatus(channel, status, statusCall, statusResult, reason);
 		delay(1);
-		newPage.clickSubmit();
+		followUpPage.clickSubmit();
 		delay(1);
-		newPage.clickYESPemberitahuan();
+		followUpPage.clickYESPemberitahuan();
 		delay(1);
-		TaskFinalPage finalPage = newPage.clickTaskFinal();
+		TaskDataAllPage allPage = followUpPage.clickTaskAll();
 		delay(1);
-		finalPage.setSearchFinal(nama);
+		allPage.setSearchAll(nama);
 		delay(1);
-		finalPage.clickSearchFinal();
+		allPage.clickSearchDataAll();
 		delay(1);
-		verifDataNotArray("(//tr)[40]", nama, statusResult);
+		verifyDataInTable("(//tr)[43]", nama, statusResult);
 		delay(10);
-		newPage.clickBtnLogoutAtMain();
+		allPage.clickBtnLogoutAtMain();
 		delay(1);
-		newPage.logout();
+		allPage.logout();
 		delay(2);
 	}
 	
@@ -663,35 +680,35 @@ public class TLMKT_TestTaskFollowUp {
 			String statusResult, String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
-		String nama = "Lumina";
+		String nama = "hanshobbiescollezione";
 		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
 		mainPage.clickTask();
 		delay(1);
-		TaskNewPage newPage = mainPage.clickDataNew();
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
 		delay(1);
-		newPage.searchDataNew(nama);
+		followUpPage.searchDataFollowUp(nama);
 		delay(1);
-		newPage.clickTopTable();
+		followUpPage.clickTopTable();
 		delay(1);
-		newPage.clickStatus(channel, status, statusCall, statusResult, reason);
+		followUpPage.clickStatus(channel, status, statusCall, statusResult, reason);
 		delay(1);
-		newPage.clickSubmit();
+		followUpPage.clickSubmit();
 		delay(1);
-		newPage.clickYESPemberitahuan();
+		followUpPage.clickYESPemberitahuan();
 		delay(1);
-		TaskFinalPage finalPage = newPage.clickTaskFinal();
+		TaskDataAllPage allPage = followUpPage.clickTaskAll();
 		delay(1);
-		finalPage.setSearchFinal(nama);
+		allPage.setSearchAll(nama);
 		delay(1);
-		finalPage.clickSearchFinal();
+		allPage.clickSearchDataAll();
 		delay(1);
-		verify("(//tr)[40]", nama, statusResult);
+		verifyDataInTable("(//tr)[43]", nama, statusResult);
 		delay(10);
-		newPage.clickBtnLogoutAtMain();
+		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
-		newPage.logout();
+		followUpPage.logout();
 		delay(2);
 	}
 	
