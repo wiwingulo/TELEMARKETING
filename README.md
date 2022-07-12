@@ -2,5 +2,5 @@
 
 This branch is developed by ridhotadjudin
 
-The website link that under evaluation:
+The link of website that under evaluation:
 https://sqa.peluangkerjaku.com/tele/
