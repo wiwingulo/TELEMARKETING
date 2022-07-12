@@ -61,8 +61,10 @@ public class LoginPage {
 
 	@FindBy(xpath = "(//span[@id='ui-id-2'])[1]")
 	public WebElement txtPeringatanLogin;
+	
 	@FindBy(xpath = "//span[normalize-space()='OK']")
 	public WebElement btnOKPeringatan;
+	
 	@FindBy(xpath = "(//button[@title='Close'])[2]")
 	public WebElement btnCancelPeringatan;
 }

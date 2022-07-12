@@ -10,54 +10,53 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.telemarket.task.pom.agent.AGN_LoginPage;
 import com.telemarket.task.pom.agent.AGN_MainPage;
 import com.telemarket.task.pom.agent.AGN_TaskFinalPage;
+import com.telemarket.task.test.Utility;
 
-
-public class AGN_TestTaskFinal {
+public class AGN_TestTaskFinal extends Utility {
 	
 	protected WebDriver driver;
-	protected AGN_LoginPage loginPage;
-	protected AGN_MainPage mainPage;
-	protected AGN_TaskFinalPage finalPage;
-
-	public void delay(int inInt) {
-		try {
-			Thread.sleep(inInt*1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	
+	public boolean verifyDataInTable(String xpath, String data1, String data2) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpath));
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String isiElement = webElement.getText();
+			System.out.println(isiElement);
+			if (isiElement.contains(data1) && isiElement.contains(data2)) {
+				checkData = true;
+			} else if (isiElement.isBlank()) {
+				break;
+			} else {
+				checkData = false;
+			}
 		}
+		assertTrue(checkData);
+		return checkData;
 	}
-
-	@BeforeTest
-	public void init() {
+	
+	@BeforeMethod
+	public void cekSession() {
 		System.setProperty("url", "https://sqa.peluangkerjaku.com/tele/");
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
-		loginPage = new AGN_LoginPage(driver);
-		mainPage = new AGN_MainPage(driver);
-		finalPage = new AGN_TaskFinalPage(driver);
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get(System.getProperty("url"));
 	}
 
-	@BeforeMethod
-	public void cekSession() {
-		driver.get(System.getProperty("url"));
-	}
-
 	@Test(priority = 1)
-	public void test_final_page() {
+	public void testAGNFinal_goToFinalPage() {
 		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
 		AGN_MainPage mainPage = loginPage.loginToMainPage();
-		delay(2);
+		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
 		mainPage.clickTask();
@@ -65,11 +64,7 @@ public class AGN_TestTaskFinal {
 		AGN_TaskFinalPage finalPage = mainPage.clickTaskFinal();
 		delay(1);
 		assertEquals(finalPage.getTextFinal(),"DATA FINAL");
-		delay(1);
-		finalPage.clickBtnLogoutAtMain();
-		delay(1);
-		finalPage.logout();
-		delay(2);
+		delay(3);
 	}
 	
 	@DataProvider(name = "validData")
@@ -79,10 +74,10 @@ public class AGN_TestTaskFinal {
 	}
 	
 	@Test(priority = 2, dataProvider = "validData")
-	public void test_final_search_valid(String inNama, String inLink ) {
+	public void testAGNFinal_validSearch(String inNama, String inLink ) {
 		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
 		AGN_MainPage mainPage = loginPage.loginToMainPage();
-		delay(2);
+		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
 		mainPage.clickTask();
@@ -93,25 +88,15 @@ public class AGN_TestTaskFinal {
 		delay(1);
 		finalPage.clickSearchFinal();
 		delay(2);
-		List<WebElement> lstElement = driver.findElements(By.xpath("//tbody"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(inNama) && webElement.getText().contains(inLink)) {
-				check = true;
-				delay(3);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[25]", inNama, inLink);
+		} finally {
+			delay(3);
 		}
-		assertTrue(check);
-		delay(1);
-		finalPage.clickBtnLogoutAtMain();
-		delay(1);
-		finalPage.logout();
-		delay(3);
 	}
 	
 	@Test(priority = 3, dataProvider = "validData")
-	public void test_final_search_valid_greenBtn(String inNama, String inLink ) {
+	public void testAGNFinal_validSearch_btnGreen(String inNama, String inLink ) {
 		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
 		AGN_MainPage mainPage = loginPage.loginToMainPage();
 		delay(2);
@@ -124,25 +109,15 @@ public class AGN_TestTaskFinal {
 		finalPage.setSearchFinal(inNama);
 		finalPage.clickGreenSearchFinal();
 		delay(2);
-		List<WebElement> lstElement = driver.findElements(By.xpath("//tbody"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(inNama) && webElement.getText().contains(inLink)) {
-				check = true;
-				delay(3);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[25]", inNama, inLink);
+		} finally {
+			delay(3);
 		}
-		assertTrue(check);
-		delay(1);
-		finalPage.clickBtnLogoutAtMain();
-		delay(1);
-		finalPage.logout();
-		delay(2);
 	}
 	
 	@Test(priority = 4)
-	public void testFinal_clickTable_gotoActivity() {
+	public void testSPVFinal_clickTableToActivity() {
 		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
 		AGN_MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -169,19 +144,16 @@ public class AGN_TestTaskFinal {
 		finalPage.viewTable(50);
 		delay(1);
 		finalPage.viewTable(100);
-		delay(1);
+		delay(2);
 		finalPage.viewTable(500);
 		delay(3);
 		finalPage.setSearchFinal("kopi");
 		delay(1);
 		finalPage.clickSearchFinal();
-		delay(3);
-		finalPage.clickBtnLogoutAtMain();
-		delay(1);
-		finalPage.logout();
+		delay(4);
 	}
 	
-	@AfterTest
+	@AfterMethod
 	public void close() {
 		driver.close();
 	}
