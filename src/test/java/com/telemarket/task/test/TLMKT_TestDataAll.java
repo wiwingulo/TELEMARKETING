@@ -20,8 +20,8 @@ import org.testng.annotations.Test;
 
 import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
+import com.telemarket.task.pom.TaskAgreePage;
 import com.telemarket.task.pom.TaskDataAllPage;
-import com.telemarket.task.pom.TaskFinalPage;
 
 public class TLMKT_TestDataAll {
 	
@@ -1047,18 +1047,19 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		allPage.clickYESPemberitahuan();
 		delay(1);
-		TaskFinalPage finalPage = allPage.clickTaskFinal();
+		TaskAgreePage agreePage = allPage.clickDataAgree();
 		delay(1);
-		finalPage.setSearchFinal(nama);
+		agreePage.searchDataAgree(nama);
 		delay(1);
-		finalPage.clickSearchFinal();
-		delay(1);
-		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
-		delay(6);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		try {
+			verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@Test(priority = 24)
@@ -1085,18 +1086,19 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		allPage.clickYESPemberitahuan();
 		delay(1);
-		TaskFinalPage finalPage = allPage.clickTaskFinal();
+		allPage.setSearchAll(nama);
 		delay(1);
-		finalPage.setSearchFinal(nama);
-		delay(1);
-		finalPage.clickSearchFinal();
-		delay(1);
-		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
-		delay(6);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		allPage.clickSearchDataAll();
+		delay(3);
+		try {
+			verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusInvalid")
@@ -1141,16 +1143,17 @@ public class TLMKT_TestDataAll {
 		delay(1);
 		allPage.setSearchAll(nama);
 		delay(1);
-		allPage.clickStatus(reason);
-		delay(1);
 		allPage.clickSearchDataAll();
-		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, reason);
-		delay(5);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 		delay(3);
+		try {
+			verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusInvalidWA")

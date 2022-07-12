@@ -39,7 +39,7 @@ public class AGN_TaskAgreePage extends AGN_MainPage {
 		btnExportAgree.click();
 	}
 
-	@FindBy(xpath = "(//tr)[41]")
+	@FindBy(xpath = "(//tr)[26]")
 	protected WebElement topTable;
 
 	public void clickTopTable() {
@@ -60,7 +60,41 @@ public class AGN_TaskAgreePage extends AGN_MainPage {
 	public void closeAgreeActivity() {
 		btnCloseAgreeActivity.click();
 	}
+
+	@FindBy(id = "tl_user_activity_agree-1212-52891_text")
+	protected WebElement setLink;
 	
+	public void setLinkActivity(String in) {
+		setLink.sendKeys(in);
+	}
+	
+	@FindBy(xpath = "//span[normalize-space()='UPDATE']")
+	protected WebElement btnUpdateLinkActivity;
+	
+	public void clickUpdateLink() {
+		btnUpdateLinkActivity.click();
+	}
+	
+	@FindBy(id = "ui-id-9")
+	protected WebElement txtInformasi;
+	
+	public String getTextInformasi() {
+		return txtInformasi.getText();
+	}
+	
+	@FindBy(id = "(//button[@title='Close'])[1]")
+	protected WebElement btnCloseInformasiActivity;
+	
+	public void clickCloseInformasiActivity() {
+		btnCloseInformasiActivity.click();
+	}
+	
+	@FindBy(xpath = "(//span[normalize-space()='OK'])[1]")
+	protected WebElement btnOKInformasiActivity;
+	
+	public void clickOKInformasiActivity() {
+		btnOKInformasiActivity.click();
+	}
 	
 	/////// PAGINATION ---------------------------
 	@FindBy(xpath = "//option[@value='10']")

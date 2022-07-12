@@ -542,6 +542,21 @@ public class AGN_TaskFollowUpPage extends AGN_MainPage {
 		btnPemberitahuanYES.click();
 	}
 	
+	//////PEMBERITAHUAN STATUS GAGAL ------------------------------
+	
+	@FindBy(xpath = "(//p[normalize-space()='Status Result Wajib Diisi !'])[1]")
+	protected WebElement txtPemberitahuan;
+	
+	public String getTextPemberitahuanGagal() {
+		return txtPemberitahuan.getText();
+	}
+	
+	@FindBy(xpath = "(//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick'])[1]")
+	protected WebElement btnClosePemberitahuanGagal;
+
+	public void clickClosePemberitahuanGagal() {
+		btnClosePemberitahuanGagal.click();
+	}
 	
 	/////// PAGINATION ---------------------------
 	@FindBy(xpath = "//option[@value='10']")

@@ -577,7 +577,6 @@ public class TaskNewPage extends MainPage {
 		btnClosePemberitahuanGagal.click();
 	}
 	
-	
 	/////// PAGINATION
 	/////// -----------------------------------------------------------------
 	@FindBy(xpath = "//option[@value='10']")

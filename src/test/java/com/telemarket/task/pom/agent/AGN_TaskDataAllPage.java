@@ -32,6 +32,7 @@ public class AGN_TaskDataAllPage extends AGN_MainPage {
 	protected WebElement inputCustomerDataAll;
 	
 	public void setSearchAll(String in) {
+		inputCustomerDataAll.clear();
 		inputCustomerDataAll.sendKeys(in);
 	}
 	
@@ -164,7 +165,7 @@ public class AGN_TaskDataAllPage extends AGN_MainPage {
 		btnExport.click();
 	}
 	
-	@FindBy(xpath = "(//tr)[43]")
+	@FindBy(xpath = "(//tr)[28]")
 	protected WebElement topTable;
 
 	public void clickTopTable() {
@@ -212,7 +213,7 @@ public class AGN_TaskDataAllPage extends AGN_MainPage {
 		btnSendWA.click();
 	}
 	
-	@FindBy(id = "ui-id-17")
+	@FindBy(xpath = "(//h3[normalize-space()='Message WA'])[1]")
 	protected WebElement btnMessageWA;
 	
 	public void clickMessageWA() {
@@ -298,7 +299,7 @@ public class AGN_TaskDataAllPage extends AGN_MainPage {
 	@FindBy(xpath = "//option[@value='Berhasil Download']")
 	protected WebElement btnReason_BerhasilDownload;
 
-	@FindBy(xpath = "//option[@value='Follow Up Download']")
+	@FindBy(xpath = "(//option[@value='Follow Up Download'])[1]")
 	protected WebElement btnReason_FollowUpDownload;
 
 	@FindBy(xpath = "(//option[@value='Follow Up'][normalize-space()='Follow Up'])[2]")
@@ -349,7 +350,7 @@ public class AGN_TaskDataAllPage extends AGN_MainPage {
 	@FindBy(xpath = "//option[@value='Terlalu Banyak Aplikasi atau Platform']")
 	protected WebElement btnReason_TerlaluBanyak;
 
-	@FindBy(xpath = "//option[@value='Memory Handphone Penuh']")
+	@FindBy(xpath = "(//option[@value='Memory Handphone Penuh'])[1]")
 	protected WebElement btnReason_MemoryHandphone;
 
 	@FindBy(xpath = "//option[@value='Tidak Punya Android']")
@@ -369,65 +370,65 @@ public class AGN_TaskDataAllPage extends AGN_MainPage {
 
 	@FindBy(xpath = "(//option[@value='Tidak Berhasil'][normalize-space()='Tidak Berhasil'])[2]")
 	protected WebElement btnStatusResult_TidakBerhasil;
-
+	
 	@FindBy(xpath = "(//option[@value='Tidak Berhasil'][normalize-space()='Tidak Berhasil'])[3]")
 	protected WebElement btnReason_TidakBerhasil;
 
-	@FindBy(xpath = "//option[@value='Salah Sambung']")
+	@FindBy(xpath = "(//option[@value='Salah Sambung'][normalize-space()='Salah Sambung'])[2]")
 	protected WebElement btnStatusCall_SalahSambung;
 
-	@FindBy(xpath = "(//option[@value='Salah Sambung'][normalize-space()='Salah Sambung'])[2]")
+	@FindBy(xpath = "(//option[@value='Salah Sambung'][normalize-space()='Salah Sambung'])[3]")
 	protected WebElement btnStatusResult_SalahSambung;
 
-	@FindBy(xpath = "(//option[@value='Salah Sambung'][normalize-space()='Salah Sambung'])[3]")
+	@FindBy(xpath = "(//option[@value='Salah Sambung'][normalize-space()='Salah Sambung'])[4]")
 	protected WebElement btnReason_SalahSambung;
 
-	@FindBy(xpath = "//option[@value='Tidak Diangkat']")
+	@FindBy(xpath = "(//option[@value='Tidak Diangkat'][normalize-space()='Tidak Diangkat'])[2]")
 	protected WebElement btnStatusCall_TidakDiangkat;
 
-	@FindBy(xpath = "(//option[@value='Tidak Diangkat'][normalize-space()='Tidak Diangkat'])[2]")
+	@FindBy(xpath = "(//option[@value='Tidak Diangkat'][normalize-space()='Tidak Diangkat'])[3]")
 	protected WebElement btnStatusResult_TidakDiangkat;
 
-	@FindBy(xpath = "(//option[@value='Tidak Diangkat'][normalize-space()='Tidak Diangkat'])[3]")
+	@FindBy(xpath = "(//option[@value='Tidak Diangkat'][normalize-space()='Tidak Diangkat'])[4]")
 	protected WebElement btnReason_TidakDiangkat;
 
 	@FindBy(xpath = "//option[@value='Tidak Tersambung']")
 	protected WebElement btnStatus_TidakTersambung;
 
-	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[1]")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[2]")
 	protected WebElement btnStatusCall_NomerSalah;
 
-	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[2]")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[3]")
 	protected WebElement btnStatusResult_NomerSalah;
 
-	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[3]")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[4]")
 	protected WebElement btnReason_NomerSalah;
 
-	@FindBy(xpath = "//option[@value='Mailbox']")
+	@FindBy(xpath = "(//option[@value='Mailbox'][normalize-space()='Mailbox'])[2]")
 	protected WebElement btnStatusCall_Mailbox;
 
-	@FindBy(xpath = "(//option[@value='Mailbox'][normalize-space()='Mailbox'])[2]")
+	@FindBy(xpath = "(//option[@value='Mailbox'][normalize-space()='Mailbox'])[3]")
 	protected WebElement btnStatusResult_Mailbox;
 
-	@FindBy(xpath = "(//option[@value='Mailbox'][normalize-space()='Mailbox'])[3]")
+	@FindBy(xpath = "(//option[@value='Mailbox'][normalize-space()='Mailbox'])[4]")
 	protected WebElement btnReason_Mailbox;
 
 	@FindBy(xpath = "//option[@value='Invalid Number']")
 	protected WebElement btnStatusCall_InvalidNumber;
 
-	@FindBy(xpath = "(//option[@value='Tidak Ada Nomor Telepon'][normalize-space()='Tidak Ada Nomor Telepon'])[1]")
+	@FindBy(xpath = "(//option[@value='Tidak Ada Nomor Telepon'][normalize-space()='Tidak Ada Nomor Telepon'])[2]")
 	protected WebElement btnStatusResult_TidakAda;
 
-	@FindBy(xpath = "(//option[@value='Tidak Ada Nomor Telepon'][normalize-space()='Tidak Ada Nomor Telepon'])[2]")
+	@FindBy(xpath = "(//option[@value='Tidak Ada Nomor Telepon'][normalize-space()='Tidak Ada Nomor Telepon'])[3]")
 	protected WebElement btnReason_TidakAda;
 
 	@FindBy(xpath = "//option[@value='Telepon Not Register ']")
 	protected WebElement btnStatusCall_TeleponNot;
 
-	@FindBy(xpath = "(//option[@value='Tidak Terdaftar'][normalize-space()='Tidak Terdaftar'])[1]")
+	@FindBy(xpath = "(//option[@value='Tidak Terdaftar'][normalize-space()='Tidak Terdaftar'])[2]")
 	protected WebElement btnStatusResult_TidakTerdaftar;
 
-	@FindBy(xpath = "(//option[@value='Tidak Terdaftar'][normalize-space()='Tidak Terdaftar'])[2]")
+	@FindBy(xpath = "(//option[@value='Tidak Terdaftar'][normalize-space()='Tidak Terdaftar'])[3]")
 	protected WebElement btnReason_TidakTerdaftar;
 
 	@FindBy(xpath = "//option[@value='Whatsapp']")

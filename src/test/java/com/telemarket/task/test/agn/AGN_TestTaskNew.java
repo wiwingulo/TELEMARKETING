@@ -19,11 +19,14 @@ import org.testng.annotations.Test;
 
 import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
+import com.telemarket.task.pom.TaskDataAllPage;
+import com.telemarket.task.pom.TaskFinalPage;
 import com.telemarket.task.pom.TaskNewPage;
 import com.telemarket.task.pom.agent.AGN_LoginPage;
 import com.telemarket.task.pom.agent.AGN_MainPage;
 import com.telemarket.task.pom.agent.AGN_TaskAgreePage;
 import com.telemarket.task.pom.agent.AGN_TaskDataAllPage;
+import com.telemarket.task.pom.agent.AGN_TaskFinalPage;
 import com.telemarket.task.pom.agent.AGN_TaskFollowUpPage;
 import com.telemarket.task.pom.agent.AGN_TaskNewPage;
 
@@ -725,6 +728,282 @@ public class AGN_TestTaskNew {
 		delay(1);
 		allPage.logout();
 		delay(2);
+	}
+	
+	@Test(priority = 15)
+	public void testNewActivity_status_resultBerhasil_reasonBerhasil() {
+		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
+		AGN_MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "anton_segar_online";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		AGN_TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus("Call","Tersambung","Diangkat","Berhasil","Berhasil");
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		AGN_TaskAgreePage agreePage = newPage.clickDataAgree();
+		delay(1);
+		agreePage.searchDataAgree(nama);
+		delay(1);
+		try {
+			verifyDataInTable("(//tr)[26]", nama, "Berhasil");
+		} finally {
+			delay(10);
+			newPage.clickBtnLogoutAtMain();
+			delay(1);
+			newPage.logout();
+			delay(2);
+		}
+	}
+	
+	@Test(priority = 16)
+	public void testNewActivity_statusWA_resultBerhasil_reasonBerhasil() {
+		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
+		AGN_MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "anton_segar_online";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		AGN_TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus("Whatsapp","Tersambung","Diangkat","Berhasil","Berhasil");
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		AGN_TaskAgreePage agreePage = newPage.clickDataAgree();
+		delay(1);
+		agreePage.searchDataAgree(nama);
+		delay(1);
+		try {
+			verifyDataInTable("(//tr)[26]", nama, "Berhasil");
+		} finally {
+			delay(10);
+			newPage.clickBtnLogoutAtMain();
+			delay(1);
+			newPage.logout();
+			delay(2);
+		}
+	}
+	
+	@DataProvider(name = "statusInvalid")
+	public Object[][] statusInvalid() {
+		Object[][] myData = { 
+				{"Sportvan G20","Call","Tersambung","Diangkat","Tidak Berhasil","Tidak Berhasil" },
+				{"Grand Am","Call","Tersambung","Salah Sambung","Salah Sambung","Salah Sambung" },
+				{"Grand Am","Call","Tersambung","Tidak Diangkat","Tidak Diangkat","Tidak Diangkat" },
+				{"Grand Am","Call","Tidak Tersambung","Nomer Salah","Nomer Salah","Nomer Salah" },
+				{"Grand Am","Call","Tidak Tersambung","Mailbox","Mailbox","Mailbox" },
+				{"Grand Am","Call","Tidak Tersambung","Invalid Number","Tidak Ada Nomor Telepon","Tidak Ada Nomor Telepon" },
+				{"Grand Am","Call","Tidak Tersambung","Telepon Not Register","Tidak Terdaftar","Tidak Terdaftar" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 17, dataProvider="statusInvalid")
+	public void testNewActivity_status_invalid(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
+		AGN_MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		AGN_TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		AGN_TaskDataAllPage allPage = newPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(nama);
+		delay(1);
+		allPage.clickStatus(reason);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(1);
+		try {
+			verifyDataInTable("(//tr)[43]", nama, reason);
+		} finally {
+			delay(3);
+			newPage.clickBtnLogoutAtMain();
+			delay(1);
+			newPage.logout();
+			delay(3);
+		}
+	}
+	
+	@DataProvider(name = "statusInvalidWA")
+	public Object[][] statusInvalidWA() {
+		Object[][] myData = { 
+				{"Grand Am","Whatsapp","Tersambung","Diangkat","Tidak Berhasil","Tidak Berhasil" },
+				{"Grand Am","Whatsapp","Tersambung","Salah Sambung","Salah Sambung","Salah Sambung" },
+				{"Grand Am","Whatsapp","Tersambung","Tidak Diangkat","Tidak Diangkat","Tidak Diangkat" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Nomer Salah","Nomer Salah","Nomer Salah" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Mailbox","Mailbox","Mailbox" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Invalid Number","Tidak Ada Nomor Telepon","Tidak Ada Nomor Telepon" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Telepon Not Register","Tidak Terdaftar","Tidak Terdaftar" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 18, dataProvider="statusInvalidWA")
+	public void testNewActivity_statusWA_invalid(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
+		AGN_MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		AGN_TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		newPage.clickYESPemberitahuan();
+		delay(1);
+		AGN_TaskDataAllPage allPage = newPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(nama);
+		delay(1);
+		allPage.clickStatus(reason);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(1);
+		try {
+			verifyDataInTable("(//tr)[43]", nama, reason);
+		} finally {
+			delay(3);
+			newPage.clickBtnLogoutAtMain();
+			delay(1);
+			newPage.logout();
+			delay(3);
+		}
+	}
+	
+	@DataProvider(name = "statusEmpty")
+	public Object[][] statusEmpty() {
+		Object[][] myData = { 
+				{"HHR","Call","Tersambung","Diangkat","","" },
+				{"HHR","Call","Tersambung","","","" },
+				{"HHR","Call","","","","" },
+				{"HHR","Call","Tersambung","Diangkat","Setuju","" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 19, dataProvider="statusEmpty")
+	public void testNewActivity_status_empty(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
+		AGN_MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		AGN_TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		try {
+			assertEquals(newPage.getTextPemberitahuanGagal(), "Pemberitahuan !");
+			delay(3);
+		} finally {
+			newPage.clickClosePemberitahuanGagal();
+			delay(1);
+			newPage.clickCloseActivityNew();
+			delay(1);
+			newPage.clickBtnLogoutAtMain();
+			delay(1);
+			newPage.logout();
+			delay(2);
+		}
+	}
+	
+	@DataProvider(name = "statusEmptyWA")
+	public Object[][] statusEmptyWA() {
+		Object[][] myData = { 
+				{"Grand Am","Whatsapp","Tersambung","Diangkat","","" },
+				{"Grand Am","Whatsapp","Tersambung","","","" },
+				{"Grand Am","Whatsapp","","","","" },
+				{"Grand Am","Whatsapp","Tersambung","Diangkat","Setuju","" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 20, dataProvider="statusEmptyWA")
+	public void testNewActivity_statusWA_empty(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
+		AGN_MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		AGN_TaskNewPage newPage = mainPage.clickDataNew();
+		delay(1);
+		newPage.searchDataNew(nama);
+		delay(1);
+		newPage.clickTopTable();
+		delay(1);
+		newPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		newPage.clickSubmit();
+		delay(1);
+		try {
+			assertEquals(newPage.getTextPemberitahuanGagal(), "Pemberitahuan !");
+			delay(3);
+		} finally {
+			newPage.clickClosePemberitahuanGagal();
+			delay(1);
+			newPage.clickCloseActivityNew();
+			delay(1);
+			newPage.clickBtnLogoutAtMain();
+			delay(1);
+			newPage.logout();
+			delay(2);
+		}
 	}
 	
 	@AfterTest

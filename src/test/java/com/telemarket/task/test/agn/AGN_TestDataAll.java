@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 
 import com.telemarket.task.pom.agent.AGN_LoginPage;
 import com.telemarket.task.pom.agent.AGN_MainPage;
+import com.telemarket.task.pom.agent.AGN_TaskAgreePage;
 import com.telemarket.task.pom.agent.AGN_TaskDataAllPage;
 import com.telemarket.task.pom.agent.AGN_TaskFinalPage;
 
@@ -36,22 +37,6 @@ public class AGN_TestDataAll {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private File getLatestFilefromDir(String dirPath) {
-		File dir = new File(dirPath);
-		File[] files = dir.listFiles();
-		if (files == null || files.length == 0) {
-			return null;
-		}
-
-		File lastModifiedFile = files[0];
-		for (int i = 1; i < files.length; i++) {
-			if (lastModifiedFile.lastModified() < files[i].lastModified()) {
-				lastModifiedFile = files[i];
-			}
-		}
-		return lastModifiedFile;
 	}
 	
 	public boolean verifyDataInTable(String xpath, String data) {
@@ -81,6 +66,25 @@ public class AGN_TestDataAll {
 			String isiElement = webElement.getText();
 			System.out.println(isiElement);
 			if (isiElement.contains(data) && isiElement.contains(data2)) {
+				checkData = true;
+			} else if (isiElement.isBlank()) {
+				break;
+			} else {
+				checkData = false;
+			}
+		}
+		assertTrue(checkData);
+		return checkData;
+	}
+	
+	public boolean verifyDataInTable(String xpath, String data, String data2, String data3) {
+		delay(3);
+		List<WebElement> lstElement = driver.findElements(By.xpath(xpath));
+		boolean checkData = false;
+		for (WebElement webElement : lstElement) {
+			String isiElement = webElement.getText();
+			System.out.println(isiElement);
+			if (isiElement.contains(data) && isiElement.contains(data2) && isiElement.contains(data3)) {
 				checkData = true;
 			} else if (isiElement.isBlank()) {
 				break;
@@ -161,11 +165,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(2);
-		verifyDataInTable("(//tr)[28]", in);
-		delay(2);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
+		try {
+			verifyDataInTable("(//tr)[28]", in);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "dataCust")
@@ -189,11 +197,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(3);
-		verifyDataInTable("(//tr)[28]", in);
-		delay(2);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
+		try {
+			verifyDataInTable("(//tr)[28]", in);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@Test(priority = 4)
@@ -212,20 +224,16 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(2);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(agen)) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[43]", agen);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
+		
 	}
 	
 	@Test(priority = 5)
@@ -244,21 +252,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(2);
-		List<WebElement> lstElement = driver.findElements(By.xpath("//tbody"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			System.out.println(webElement.getText());
-			if (webElement.getText().contains(status)) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("//tbody", status);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 	
 	@Test(priority = 6)
@@ -279,20 +281,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(agen) && webElement.getText().contains(agen)) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[43]", cust, agen);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 	
 	@Test(priority = 7)
@@ -313,20 +310,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(cust) && webElement.getText().contains(status)) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[43]", cust, status);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 	
 	@Test(priority = 8)
@@ -347,20 +339,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(agen) && webElement.getText().contains(status)) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[43]", agen, status);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 	
 	@Test(priority = 9)
@@ -383,47 +370,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(cust) && webElement.getText().contains(agen) && webElement.getText().contains(status)) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[43]", cust, agen, status);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-	}
-
-	@Test(priority = 10)
-	public void test_all_export_data() {
-		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
-		AGN_MainPage mainPage = loginPage.loginToMainPage();
-		delay(1);
-		mainPage.clickOKPopUpAfterLogin();
-		delay(1);
-		mainPage.clickTask();
-		delay(1);
-		AGN_TaskDataAllPage allPage = mainPage.clickTaskAll();
-		delay(1);
-		allPage.setSearchAll("kopi");
-		delay(1);
-		allPage.clickSearchDataAll();
-		delay(1);
-		allPage.clickExportDataAll();
-		delay(4);
-		String downloadPath = "C:\\Users\\nexsoft\\Downloads";
-		File getLatestFile = getLatestFilefromDir(downloadPath);
-		String fileName = getLatestFile.getName();
-		assertTrue(fileName.contains("exportall"), "Data tidak ada/tidak sesuai");
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 	
 	@Test(priority = 11)
@@ -498,20 +453,15 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickGreenSearchAll();
 		delay(3);
-		List<WebElement> lstElement = driver.findElements(By.xpath("(//tr)[43]"));
-		boolean check = false;
-		for (WebElement webElement : lstElement) {
-			if (webElement.getText().contains(cust) ) {
-				check = true;
-				delay(2);
-				break;
-			}
+		try {
+			verifyDataInTable("(//tr)[43]", cust);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertTrue(check);
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 	
 	@Test(priority = 13)
@@ -601,7 +551,7 @@ public class AGN_TestDataAll {
 		delay(1);
 		AGN_TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
-		allPage.setSearchAll("MULIA ABADI");
+		allPage.setSearchAll("One Roti");
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
@@ -613,22 +563,19 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.btnSaveMultiAddPhone.click();
 		delay(2);
-		assertEquals(allPage.getTextKonfirmasi(), "Konfirmasi");
-		delay(1);
-		boolean cek = true;
-		int length = in.length();
-		if (length != 12) {
-			cek = false;
+		try {
+			assertEquals(allPage.getTextKonfirmasi(), "Konfirmasi");
+		} finally {
+			delay(1);
+			allPage.clickSaveKonfirmasi();
+			delay(2);
+			allPage.closeDataAllActivity();
+			delay(1);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertFalse(cek, "Ukuran data tidak sesuai");
-		delay(1);
-		allPage.clickSaveKonfirmasi();
-		delay(2);
-		allPage.closeDataAllActivity();
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 
 	@DataProvider(name = "phoneCharData")
@@ -648,43 +595,54 @@ public class AGN_TestDataAll {
 		delay(1);
 		AGN_TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
-		allPage.setSearchAll("MULIA ABADI");
+		allPage.setSearchAll("One Roti");
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
 		allPage.clickTopTable();
 		delay(1);
-		driver.findElement(By.xpath("//option[@value='0226077564']")).click(); //berubah tergantung data
+		driver.findElement(By.xpath("//option[@value='085652111366']")).click(); //berubah tergantung data
 		delay(1);
 		allPage.clickAddPhone();
 		delay(1);
 		allPage.setTextMultiAddPhone(in);
 		delay(1);
-		assertEquals(allPage.txtMultiAddPhone.getText(), in, "Data tidak sesuai!");
-		allPage.btnSaveMultiAddPhone.click();
-		delay(1);
-		assertEquals(allPage.getTextKonfirmasi(), "Data Berhasil Diajukan!");
-		boolean cek = true;
-		int length = in.length();
-		if (length != 12) {
-			cek = false;
+		try {
+			assertEquals(allPage.txtMultiAddPhone.getText(), in, "Data tidak sesuai!");
+			allPage.btnSaveMultiAddPhone.click();
+			delay(1);
+			assertEquals(allPage.getTextKonfirmasi(), "Data Berhasil Diajukan!");
+			boolean cek = true;
+			int length = in.length();
+			if (length != 12) {
+				cek = false;
+			}
+			assertFalse(cek, "Ukuran data tidak sesuai");
+		} finally {
+			delay(1);
+			allPage.clickSaveKonfirmasi();
+			delay(2);
+			allPage.closeDataAllActivity();
+			delay(1);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
 		}
-		assertFalse(cek, "Ukuran data tidak sesuai");
-		delay(1);
-		allPage.clickSaveKonfirmasi();
-		delay(2);
-		allPage.closeDataAllActivity();
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 	}
 
 	@DataProvider(name = "WAData")
 	public Object[][] WAData() {
-		Object[][] myData = { { "", "" }, { "", "ini tanpa nomor" }, { "082121212121", "ini pesan wa" },
-				{ "082121212121", "" }, { "0821", "ini empat angka" }, { "0821", "" },
-				{ "0812345678901213", "ini enam belas" }, { "0812345678901213", "" } };
+		Object[][] myData = { 
+				{ "", "" }, 
+				{ "", "ini tanpa nomor" }, 
+				{ "082121212121", "ini pesan wa" },
+				{ "082121212121", "" }, 
+				{ "0821", "ini empat angka" }, 
+				{ "0821", "" },
+				{ "0812345678901213", "ini enam belas" }, 
+				{ "0812345678901213", "" } 
+				};
 		return myData;
 	}
 
@@ -699,7 +657,7 @@ public class AGN_TestDataAll {
 		delay(1);
 		AGN_TaskDataAllPage allPage = mainPage.clickTaskAll();
 		delay(1);
-		allPage.setSearchAll("MULIA ABADI");
+		allPage.setSearchAll("One Roti");
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
@@ -713,14 +671,16 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickWA();
 		delay(2);
-		// assert
-		assertEquals(allPage.getTextMessageWA(), msg);
-		assertEquals(allPage.getTextPhoneWA(), phone);
-		delay(3);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		try {
+			assertEquals(allPage.getTextMessageWA(), msg);
+			assertEquals(allPage.getTextPhoneWA(), phone);
+		} finally {
+			delay(3);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 
 	@DataProvider(name = "statusAct")
@@ -728,8 +688,7 @@ public class AGN_TestDataAll {
 		Object[][] myData = { 
 				{ "kopi", "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
 				{ "kopi", "Whatsapp", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" } 
-				
-		};
+				};
 		return myData;
 	}
 
@@ -755,16 +714,19 @@ public class AGN_TestDataAll {
 		delay(2);
 		allPage.clickSubmit();
 		delay(1);
-		assertEquals(allPage.getTextPemberitahuan(), "Apakah Anda Yakin?");
-		delay(2);
-		allPage.clickClosePemberitahuan();
-//		allPage.clickNOPemberitahuan();
-		delay(1);
-		allPage.closeDataAllActivity();
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
+		try {
+			assertEquals(allPage.getTextPemberitahuan(), "Apakah Anda Yakin?");
+		} finally {
+			delay(2);
+			allPage.clickClosePemberitahuan();
+//			allPage.clickNOPemberitahuan();
+			delay(1);
+			allPage.closeDataAllActivity();
+			delay(1);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+		}
 	}
 
 	@DataProvider(name = "statusAgree")
@@ -773,7 +735,7 @@ public class AGN_TestDataAll {
 				{ "Dakota Club", "Call", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
 				{ "Dakota Club", "Whatsapp", "Tersambung", "Diangkat", "Setuju", "Berhasil Download" },
 				{ "kopi", "Call", "Tersambung", "Diangkat", "Setuju", "Follow Up Download" },
-				{ "kopi", "Whatsapp", "Tersambung", "Diangkat", "Setuju", "Follow Up Download" } 
+				{ "Tracker", "Whatsapp", "Tersambung", "Diangkat", "Setuju", "Follow Up Download" } 
 				};
 		return myData;
 	}
@@ -804,22 +766,25 @@ public class AGN_TestDataAll {
 		delay(3);
 		allPage.setSearchAll(nama);
 		delay(1);
-		allPage.clickStatus(reason);
+		allPage.clickStatus(statusResult);
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
-		verifyDataInTable("(//tr)[43]",nama,reason);
-		delay(3);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, statusResult);
+		} finally {
+			delay(3);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusFollowUp")
 	public Object[][] statusFollowUp() {
 		Object[][] myData = { 
-				{"Dakota Club","Call","Tersambung","Diangkat","Follow Up","Telpon Kembali Lain Waktu" },
+				{"Viola Febriani","Call","Tersambung","Diangkat","Follow Up","Telpon Kembali Lain Waktu" },
 				{"Dakota Club","Call","Tersambung","Diangkat","Follow Up","Request Kirim Whatsapp Untuk Dipelajari"},
 				{"Dakota Club","Call","Tersambung","Diangkat","Follow Up","Minta Nomer Manager/Pemilik"},
 				{"Dakota Club","Call","Tersambung","Diangkat","Follow Up","Minta Pendapat Partner/Pasangan/Orangtua"},
@@ -858,25 +823,28 @@ public class AGN_TestDataAll {
 //		allPage.closeDataAllActivity();
 //		delay(2);
 		allPage.clickSubmit();
-		delay(1);
+		delay(2);
 		allPage.clickYESPemberitahuan();
 		delay(1);
 		allPage.setSearchAll(nama);
 		delay(1);
 		allPage.clickSearchDataAll();
-		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, statusResult);
-		delay(6);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, statusResult);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusTolak")
 	public Object[][] statusTolak() {
 		Object[][] myData = { 
-				{"Dakota Club","Call","Tersambung","Diangkat","Tolak","Tidak Bersedia Memberikan Kontak Owner" },
+				{"Optik nisa","Call","Tersambung","Diangkat","Tolak","Tidak Bersedia Memberikan Kontak Owner" },
 				{"Dakota Club","Call","Tersambung","Diangkat","Tolak","Tidak Fokus Online" },
 				{"Dakota Club","Call","Tersambung","Diangkat","Tolak","Tidak Tertarik, Tidak Memberi Alasan" },
 				{"Dakota Club","Call","Tersambung","Diangkat","Tolak","Tidak Mengerti dan Tidak Bersedia Dijelaskan" },
@@ -923,13 +891,16 @@ public class AGN_TestDataAll {
 		allPage.clickStatus(statusResult);
 		delay(1);
 		allPage.clickSearchDataAll();
-		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, statusResult);
-		delay(10);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, statusResult);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusTolakWA")
@@ -982,20 +953,23 @@ public class AGN_TestDataAll {
 		allPage.clickStatus(statusResult);
 		delay(1);
 		allPage.clickSearchDataAll();
-		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, statusResult);
-		delay(10);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, statusResult);
+		} finally {
+			delay(2);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@Test(priority = 23)
 	public void testDataAllActivity_status_resultBerhasil_reasonBerhasil() {
 		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
 		AGN_MainPage mainPage = loginPage.loginToMainPage();
-		String nama = "tokogitardotid";
+		String nama = "	Ikan giling azzam99";
 		delay(1);
 		mainPage.clickOKPopUpAfterLogin();
 		delay(1);
@@ -1012,21 +986,22 @@ public class AGN_TestDataAll {
 		allPage.clickStatus("Call","Tersambung","Diangkat","Berhasil","Berhasil");
 		delay(1);
 		allPage.clickSubmit();
-		delay(1);
-		allPage.clickYESPemberitahuan();
-		delay(1);
-		AGN_TaskFinalPage finalPage = allPage.clickTaskFinal();
-		delay(1);
-		finalPage.setSearchFinal(nama);
-		delay(1);
-		finalPage.clickSearchFinal();
-		delay(1);
-		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
-		delay(6);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 		delay(2);
+		allPage.clickYESPemberitahuan();
+		delay(2);
+		allPage.setSearchAll(nama);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, "Berhasil");
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@Test(priority = 24)
@@ -1053,18 +1028,19 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.clickYESPemberitahuan();
 		delay(1);
-		AGN_TaskFinalPage finalPage = allPage.clickTaskFinal();
+		allPage.setSearchAll(nama);
 		delay(1);
-		finalPage.setSearchFinal(nama);
-		delay(1);
-		finalPage.clickSearchFinal();
-		delay(1);
-		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
-		delay(6);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		allPage.clickSearchDataAll();
+		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, "Berhasil");
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusInvalid")
@@ -1109,16 +1085,19 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.setSearchAll(nama);
 		delay(1);
-		allPage.clickStatus(reason);
+		allPage.clickStatus(statusResult);
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, reason);
-		delay(5);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, reason);
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(3);
+		}
 	}
 	
 	@DataProvider(name = "statusInvalidWA")
@@ -1163,16 +1142,19 @@ public class AGN_TestDataAll {
 		delay(1);
 		allPage.setSearchAll(nama);
 		delay(1);
-		allPage.clickStatus(reason);
+		allPage.clickStatus(statusResult);
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, reason);
-		delay(5);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(3);
+		try {
+			verifyDataInTable("(//tr)[28]", nama, reason);
+		} finally {
+			delay(5);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(3);
+		}
 	}
 	
 	@DataProvider(name = "statusEmpty")
@@ -1181,7 +1163,11 @@ public class AGN_TestDataAll {
 				{"Dakota Club","Call","Tersambung","Diangkat","","" },
 				{"Dakota Club","Call","Tersambung","","","" },
 				{"Dakota Club","Call","","","","" },
-				{"Dakota Club","Call","Tersambung","Diangkat","Setuju","" }
+//				{"Dakota Club","Call","Tersambung","Diangkat","Setuju","" },
+				{"Dakota Club","Whatsapp","Tersambung","Diangkat","","" },
+				{"Dakota Club","Whatsapp","Tersambung","","","" },
+				{"Dakota Club","Whatsapp","","","","" },
+//				{"Dakota Club","Whatsapp","Tersambung","Diangkat","Setuju","" }
 		};
 		return myData;
 	}
@@ -1207,62 +1193,20 @@ public class AGN_TestDataAll {
 		allPage.clickStatus(channel,status,statusCall,statusResult,reason);
 		delay(1);
 		allPage.clickSubmit();
-		delay(1);
-		assertEquals(allPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
-		delay(3);
-		allPage.clickClosePemberitahuanGagal();
-		delay(1);
-		allPage.closeDataAllActivity();
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
 		delay(2);
-	}
-	
-	@DataProvider(name = "statusEmptyWA")
-	public Object[][] statusEmptyWA() {
-		Object[][] myData = { 
-				{"Dakota Club","Whatsapp","Tersambung","Diangkat","","" },
-				{"Dakota Club","Whatsapp","Tersambung","","","" },
-				{"Dakota Club","Whatsapp","","","","" },
-				{"Dakota Club","Whatsapp","Tersambung","Diangkat","Setuju","" }
-		};
-		return myData;
-	}
-	
-	@Test(priority = 28, dataProvider="statusEmptyWA")
-	public void testDataAllActivity_statusWA_empty(String nama,String channel, String status, String statusCall,
-			String statusResult, String reason) {
-		AGN_LoginPage loginPage = PageFactory.initElements(driver, AGN_LoginPage.class);
-		AGN_MainPage mainPage = loginPage.loginToMainPage();
-		delay(1);
-		mainPage.clickOKPopUpAfterLogin();
-		delay(1);
-		mainPage.clickTask();
-		delay(1);
-		AGN_TaskDataAllPage allPage = mainPage.clickTaskAll();
-		delay(1);
-		allPage.setSearchAll(nama);
-		delay(1);
-		allPage.clickSearchDataAll();
-		delay(1);
-		allPage.clickTopTable();
-		delay(1);
-		allPage.clickStatus(channel,status,statusCall,statusResult,reason);
-		delay(1);
-		allPage.clickSubmit();
-		delay(1);
-		assertEquals(allPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
-		delay(3);
-		allPage.clickClosePemberitahuanGagal();
-		delay(1);
-		allPage.closeDataAllActivity();
-		delay(1);
-		allPage.clickBtnLogoutAtMain();
-		delay(1);
-		allPage.logout();
-		delay(2);
+		try {
+			assertEquals(allPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
+		} finally {
+			delay(3);
+			allPage.clickClosePemberitahuanGagal();
+			delay(1);
+			allPage.closeDataAllActivity();
+			delay(1);
+			allPage.clickBtnLogoutAtMain();
+			delay(1);
+			allPage.logout();
+			delay(2);
+		}
 	}
 	
 	@AfterTest

@@ -22,7 +22,6 @@ import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
 import com.telemarket.task.pom.TaskAgreePage;
 import com.telemarket.task.pom.TaskDataAllPage;
-import com.telemarket.task.pom.TaskFinalPage;
 import com.telemarket.task.pom.TaskFollowUpPage;
 
 public class TLMKT_TestTaskFollowUp {
@@ -735,18 +734,19 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		followUpPage.clickYESPemberitahuan();
 		delay(1);
-		TaskFinalPage finalPage = followUpPage.clickTaskFinal();
+		TaskAgreePage agreePage = followUpPage.clickDataAgree();
 		delay(1);
-		finalPage.setSearchFinal(nama);
+		agreePage.searchDataAgree(nama);
 		delay(1);
-		finalPage.clickSearchFinal();
-		delay(1);
-		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
-		delay(10);
-		followUpPage.clickBtnLogoutAtMain();
-		delay(1);
-		followUpPage.logout();
-		delay(2);
+		try {
+			verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+			delay(6);
+		} finally {
+			followUpPage.clickBtnLogoutAtMain();
+			delay(1);
+			followUpPage.logout();
+			delay(2);		
+		}
 	}
 	
 	@Test(priority = 16)
@@ -771,18 +771,19 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		followUpPage.clickYESPemberitahuan();
 		delay(1);
-		TaskFinalPage finalPage = followUpPage.clickTaskFinal();
+		TaskAgreePage agreePage = followUpPage.clickDataAgree();
 		delay(1);
-		finalPage.setSearchFinal(nama);
+		agreePage.searchDataAgree(nama);
 		delay(1);
-		finalPage.clickSearchFinal();
-		delay(1);
-		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
-		delay(10);
-		followUpPage.clickBtnLogoutAtMain();
-		delay(1);
-		followUpPage.logout();
-		delay(2);
+		try {
+			verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+			delay(6);
+		} finally {
+			followUpPage.clickBtnLogoutAtMain();
+			delay(1);
+			followUpPage.logout();
+			delay(2);		
+		}
 	}
 	
 	@DataProvider(name = "statusInvalid")
@@ -829,12 +830,15 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		allPage.clickSearchDataAll();
 		delay(1);
-		verifyDataInTable("(//tr)[43]", nama, reason);
-		delay(5);
-		followUpPage.clickBtnLogoutAtMain();
-		delay(1);
-		followUpPage.logout();
-		delay(3);
+		try {
+			verifyDataInTable("(//tr)[43]", nama, reason);
+		} finally {
+			delay(5);
+			followUpPage.clickBtnLogoutAtMain();
+			delay(1);
+			followUpPage.logout();
+			delay(3);
+		}
 	}
 	
 	@DataProvider(name = "statusInvalidWA")
@@ -895,7 +899,7 @@ public class TLMKT_TestTaskFollowUp {
 				{"Dakota Club","Call","Tersambung","Diangkat","","" },
 				{"Dakota Club","Call","Tersambung","","","" },
 				{"Dakota Club","Call","","","","" },
-				{"Dakota Club","Call","Tersambung","Diangkat","Setuju","" }
+//				{"Dakota Club","Call","Tersambung","Diangkat","Setuju","" }
 		};
 		return myData;
 	}
@@ -920,16 +924,19 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		followUpPage.clickSubmit();
 		delay(1);
-		assertEquals(followUpPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
-		delay(3);
-		followUpPage.clickClosePemberitahuanGagal();
-		delay(1);
-		followUpPage.closeFollowUpActivity();
-		delay(1);
-		followUpPage.clickBtnLogoutAtMain();
-		delay(1);
-		followUpPage.logout();
-		delay(2);
+		try {
+			assertEquals(followUpPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
+		} finally {
+			delay(3);
+			followUpPage.clickClosePemberitahuanGagal();
+			delay(1);
+			followUpPage.closeFollowUpActivity();
+			delay(1);
+			followUpPage.clickBtnLogoutAtMain();
+			delay(1);
+			followUpPage.logout();
+			delay(2);
+		}
 	}
 	
 	@DataProvider(name = "statusEmptyWA")
@@ -938,7 +945,7 @@ public class TLMKT_TestTaskFollowUp {
 				{"Dakota Club","Whatsapp","Tersambung","Diangkat","","" },
 				{"Dakota Club","Whatsapp","Tersambung","","","" },
 				{"Dakota Club","Whatsapp","","","","" },
-				{"Dakota Club","Whatsapp","Tersambung","Diangkat","Setuju","" }
+//				{"Dakota Club","Whatsapp","Tersambung","Diangkat","Setuju","" }
 		};
 		return myData;
 	}
@@ -963,16 +970,19 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		followUpPage.clickSubmit();
 		delay(1);
-		assertEquals(followUpPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
-		delay(3);
-		followUpPage.clickClosePemberitahuanGagal();
-		delay(1);
-		followUpPage.closeFollowUpActivity();
-		delay(1);
-		followUpPage.clickBtnLogoutAtMain();
-		delay(1);
-		followUpPage.logout();
-		delay(2);
+		try {
+			assertEquals(followUpPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
+		} finally {
+			delay(3);
+			followUpPage.clickClosePemberitahuanGagal();
+			delay(1);
+			followUpPage.closeFollowUpActivity();
+			delay(1);
+			followUpPage.clickBtnLogoutAtMain();
+			delay(1);
+			followUpPage.logout();
+			delay(2);
+		}
 	}
 	
 	@AfterTest

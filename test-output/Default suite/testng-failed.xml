@@ -6,7 +6,7 @@
       <class name="com.telemarket.task.test.agn.AGN_TestDataAll">
         <methods>
           <include name="close"/>
-          <include name="test_all_search_empty" invocation-numbers="1"/>
+          <include name="testDataAllActivity_status_invalid" invocation-numbers="0"/>
           <include name="init"/>
           <include name="cekSession"/>
         </methods>

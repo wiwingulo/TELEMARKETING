@@ -518,6 +518,22 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 	public void clickYESPemberitahuan() {
 		btnPemberitahuanYES.click();
 	}
+	
+	/////// PEMBERITAHUAN STATUS GAGAL ------------------------------
+	
+	@FindBy(xpath = "(//span[@id='ui-id-9'])[1]")
+	protected WebElement txtPemberitahuan;
+
+	public String getTextPemberitahuanGagal() {
+		return txtPemberitahuan.getText();
+	}
+	
+	@FindBy(xpath = "(//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick'])[1]")
+	protected WebElement btnClosePemberitahuanGagal;
+
+	public void clickClosePemberitahuanGagal() {
+		btnClosePemberitahuanGagal.click();
+	}
 
 	/////// PAGINATION
 	/////// -----------------------------------------------------------------
