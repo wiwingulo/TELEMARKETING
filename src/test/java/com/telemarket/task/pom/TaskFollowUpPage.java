@@ -76,7 +76,7 @@ public class TaskFollowUpPage extends MainPage{
 		btnAddPhone.click();
 	}
 	
-///// PHONE WA --------------------------------------
+	///// PHONE WA --------------------------------------
 	@FindBy(id = "tl_user_activity--53073_text")
 	protected WebElement inputPhoneWA;
 
@@ -277,10 +277,10 @@ public class TaskFollowUpPage extends MainPage{
 	@FindBy(xpath = "//option[@value='Tidak Tersambung']")
 	protected WebElement btnStatus_TidakTersambung;
 
-	@FindBy(xpath = "//option[@value='Nomer Salah']")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[1]")
 	protected WebElement btnStatusCall_NomerSalah;
 
-	@FindBy(xpath = "(//select[@id='tl_user_activity--53051_text'])[1]")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[2]")
 	protected WebElement btnStatusResult_NomerSalah;
 
 	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[3]")
@@ -552,6 +552,22 @@ public class TaskFollowUpPage extends MainPage{
 
 	public void clickYESPemberitahuan() {
 		btnPemberitahuanYES.click();
+	}
+	
+	//////PEMBERITAHUAN STATUS GAGAL ------------------------------
+	
+	@FindBy(xpath = "(//p[normalize-space()='Status Result Wajib Diisi !'])[1]")
+	protected WebElement txtPemberitahuan;
+	
+	public String getTextPemberitahuanGagal() {
+		return txtPemberitahuan.getText();
+	}
+	
+	@FindBy(xpath = "(//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick'])[1]")
+	protected WebElement btnClosePemberitahuanGagal;
+
+	public void clickClosePemberitahuanGagal() {
+		btnClosePemberitahuanGagal.click();
 	}
 	
 	/////// PAGINATION ---------------------------

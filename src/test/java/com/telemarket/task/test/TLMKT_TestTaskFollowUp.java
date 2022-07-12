@@ -22,6 +22,7 @@ import com.telemarket.task.pom.LoginPage;
 import com.telemarket.task.pom.MainPage;
 import com.telemarket.task.pom.TaskAgreePage;
 import com.telemarket.task.pom.TaskDataAllPage;
+import com.telemarket.task.pom.TaskFinalPage;
 import com.telemarket.task.pom.TaskFollowUpPage;
 
 public class TLMKT_TestTaskFollowUp {
@@ -267,7 +268,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 	
 	@Test(priority = 5)
-	public void test_newActivity_phoneSelect_phoneAddCancel() {
+	public void testFollowUpActivity_phoneSelect_phoneAddCancel() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -298,7 +299,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 6)
-	public void test_newActivity_phoneSelect_phoneAdd_valid() {
+	public void testFollowUpActivity_phoneSelect_phoneAdd_valid() {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -340,7 +341,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 7, dataProvider = "phoneData")
-	public void test_newActivity_phoneSelect_phoneAdd_invalid(String in) {
+	public void testFollowUpActivity_phoneSelect_phoneAdd_invalid(String in) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -385,7 +386,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 8, dataProvider = "phoneCharData", enabled = false)
-	public void test_newActivity_phoneSelect_phoneAdd_invalidChar(String in) {
+	public void testFollowUpActivity_phoneSelect_phoneAdd_invalidChar(String in) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -434,7 +435,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 9, dataProvider = "WAData")
-	public void testNewActivity_sendWA_validPhone_validMsg(String phone, String msg) {
+	public void testFollowUpActivity_sendWA_validPhone_validMsg(String phone, String msg) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
 		delay(1);
@@ -473,7 +474,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 10, dataProvider = "statusAct")
-	public void testNewActivity_status_valid(String channel, String status, String statusCall, String statusResult,
+	public void testFollowUpActivity_status_valid(String channel, String status, String statusCall, String statusResult,
 			String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -497,7 +498,7 @@ public class TLMKT_TestTaskFollowUp {
 //		followUpPage.clickClosePemberitahuan();
 		followUpPage.clickNOPemberitahuan();
 		delay(1);
-		followUpPage.closeFollowUpActivity();;
+		followUpPage.closeFollowUpActivity();
 		delay(1);
 		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
@@ -512,7 +513,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 11, dataProvider = "statusAgree")
-	public void testNewActivity_status_saveAgree(String channel, String status, String statusCall, String statusResult,
+	public void testFollowUpActivity_status_saveAgree(String channel, String status, String statusCall, String statusResult,
 			String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -568,7 +569,7 @@ public class TLMKT_TestTaskFollowUp {
 	}
 
 	@Test(priority = 12, dataProvider = "statusFollowUp")
-	public void testNewActivity_status_saveFollowUp(String channel, String status, String statusCall,
+	public void testFollowUpActivity_status_saveFollowUp(String channel, String status, String statusCall,
 			String statusResult, String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -604,23 +605,23 @@ public class TLMKT_TestTaskFollowUp {
 	public Object[][] statusTolak() {
 		Object[][] myData = { 
 				{"Call","Tersambung","Diangkat","Tolak","Tidak Bersedia Memberikan Kontak Owner" },
-//				{"Call","Tersambung","Diangkat","Tolak","Tidak Fokus Online" },
-//				{"Call","Tersambung","Diangkat","Tolak","Tidak Tertarik, Tidak Memberi Alasan" },
-//				{"Call","Tersambung","Diangkat","Tolak","Tidak Mengerti dan Tidak Bersedia Dijelaskan" },
-//				{"Call","Tersambung","Diangkat","Tolak","Tidak Mengenal Tokko/Bukukas" },
-//				{"Call","Tersambung","Diangkat","Tolak","Rating/Comment Buruk Tokko di Sosial Media" },
-//				{"Call","Tersambung","Diangkat","Tolak","Tidak Mau Dipersulit Menggunakan Tokko" },
-//				{"Call","Tersambung","Diangkat","Tolak","Terlalu Banyak Aplikasi atau Platform" },
-//				{"Call","Tersambung","Diangkat","Tolak","Memory Handphone Penuh" },
-//				{"Call","Tersambung","Diangkat","Tolak","Tidak Punya Android" },
-//				{"Call","Tersambung","Diangkat","Tolak","Lebih Nyaman Dengan Platform Selain Tokko" },
-//				{"Call","Tersambung","Diangkat","Tolak","Usaha Sudah Tutup/Bangkrut" },
+				{"Call","Tersambung","Diangkat","Tolak","Tidak Fokus Online" },
+				{"Call","Tersambung","Diangkat","Tolak","Tidak Tertarik, Tidak Memberi Alasan" },
+				{"Call","Tersambung","Diangkat","Tolak","Tidak Mengerti dan Tidak Bersedia Dijelaskan" },
+				{"Call","Tersambung","Diangkat","Tolak","Tidak Mengenal Tokko/Bukukas" },
+				{"Call","Tersambung","Diangkat","Tolak","Rating/Comment Buruk Tokko di Sosial Media" },
+				{"Call","Tersambung","Diangkat","Tolak","Tidak Mau Dipersulit Menggunakan Tokko" },
+				{"Call","Tersambung","Diangkat","Tolak","Terlalu Banyak Aplikasi atau Platform" },
+				{"Call","Tersambung","Diangkat","Tolak","Memory Handphone Penuh" },
+				{"Call","Tersambung","Diangkat","Tolak","Tidak Punya Android" },
+				{"Call","Tersambung","Diangkat","Tolak","Lebih Nyaman Dengan Platform Selain Tokko" },
+				{"Call","Tersambung","Diangkat","Tolak","Usaha Sudah Tutup/Bangkrut" },
 		};
 		return myData;
 	}
 
 	@Test(priority = 13, dataProvider = "statusTolak")
-	public void testNewActivity_status_saveTolak(String channel, String status, String statusCall,
+	public void testFollowUpActivity_status_saveTolak(String channel, String status, String statusCall,
 			String statusResult, String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -660,23 +661,23 @@ public class TLMKT_TestTaskFollowUp {
 	public Object[][] statusTolakWA() {
 		Object[][] myData = { 
 				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Bersedia Memberikan Kontak Owner" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Fokus Online" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Tertarik, Tidak Memberi Alasan" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mengerti dan Tidak Bersedia Dijelaskan" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mengenal Tokko/Bukukas" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Rating/Comment Buruk Tokko di Sosial Media" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mau Dipersulit Menggunakan Tokko" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Terlalu Banyak Aplikasi atau Platform" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Memory Handphone Penuh" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Punya Android" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Lebih Nyaman Dengan Platform Selain Tokko" },
-//				{"Whatsapp","Tersambung","Diangkat","Tolak","Usaha Sudah Tutup/Bangkrut" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Fokus Online" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Tertarik, Tidak Memberi Alasan" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mengerti dan Tidak Bersedia Dijelaskan" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mengenal Tokko/Bukukas" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Rating/Comment Buruk Tokko di Sosial Media" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Mau Dipersulit Menggunakan Tokko" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Terlalu Banyak Aplikasi atau Platform" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Memory Handphone Penuh" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Tidak Punya Android" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Lebih Nyaman Dengan Platform Selain Tokko" },
+				{"Whatsapp","Tersambung","Diangkat","Tolak","Usaha Sudah Tutup/Bangkrut" },
 		};
 		return myData;
 	}
 
 	@Test(priority = 14, dataProvider = "statusTolakWA")
-	public void testNewActivity_status_saveTolak_whatsapp(String channel, String status, String statusCall,
+	public void testFollowUpActivity_status_saveTolak_whatsapp(String channel, String status, String statusCall,
 			String statusResult, String reason) {
 		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 		MainPage mainPage = loginPage.loginToMainPage();
@@ -706,6 +707,268 @@ public class TLMKT_TestTaskFollowUp {
 		delay(1);
 		verifyDataInTable("(//tr)[43]", nama, statusResult);
 		delay(10);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
+		delay(2);
+	}
+	
+	@Test(priority = 15)
+	public void testFollowUpActivity_status_resultBerhasil_reasonBerhasil() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "socialaffair";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		followUpPage.clickTopTable();
+		delay(1);
+		followUpPage.clickStatus("Call","Tersambung","Diangkat","Berhasil","Berhasil");
+		delay(1);
+		followUpPage.clickSubmit();
+		delay(1);
+		followUpPage.clickYESPemberitahuan();
+		delay(1);
+		TaskFinalPage finalPage = followUpPage.clickTaskFinal();
+		delay(1);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(1);
+		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		delay(10);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
+		delay(2);
+	}
+	
+	@Test(priority = 16)
+	public void testFollowUpActivity_statusWA_resultBerhasil_reasonBerhasil() {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		String nama = "socialaffair";
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		followUpPage.clickTopTable();
+		delay(1);
+		followUpPage.clickStatus("Whatsapp","Tersambung","Diangkat","Berhasil","Berhasil");
+		delay(1);
+		followUpPage.clickSubmit();
+		delay(1);
+		followUpPage.clickYESPemberitahuan();
+		delay(1);
+		TaskFinalPage finalPage = followUpPage.clickTaskFinal();
+		delay(1);
+		finalPage.setSearchFinal(nama);
+		delay(1);
+		finalPage.clickSearchFinal();
+		delay(1);
+		verifyDataInTable("(//tr)[40]", nama, "Berhasil");
+		delay(10);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
+		delay(2);
+	}
+	
+	@DataProvider(name = "statusInvalid")
+	public Object[][] statusInvalid() {
+		Object[][] myData = { 
+				{"Ragawi","Call","Tersambung","Diangkat","Tidak Berhasil","Tidak Berhasil" },
+				{"Grand Am","Call","Tersambung","Salah Sambung","Salah Sambung","Salah Sambung" },
+				{"Grand Am","Call","Tersambung","Tidak Diangkat","Tidak Diangkat","Tidak Diangkat" },
+				{"Grand Am","Call","Tidak Tersambung","Nomer Salah","Nomer Salah","Nomer Salah" },
+				{"Grand Am","Call","Tidak Tersambung","Mailbox","Mailbox","Mailbox" },
+				{"Grand Am","Call","Tidak Tersambung","Invalid Number","Tidak Ada Nomor Telepon","Tidak Ada Nomor Telepon" },
+				{"Grand Am","Call","Tidak Tersambung","Telepon Not Register","Tidak Terdaftar","Tidak Terdaftar" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 17, dataProvider="statusInvalid")
+	public void testFollowUpActivity_status_invalid(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		followUpPage.clickTopTable();
+		delay(1);
+		followUpPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		followUpPage.clickSubmit();
+		delay(1);
+		followUpPage.clickYESPemberitahuan();
+		delay(1);
+		TaskDataAllPage allPage = followUpPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(nama);
+		delay(1);
+		allPage.clickStatus(reason);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(1);
+		verifyDataInTable("(//tr)[43]", nama, reason);
+		delay(5);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
+		delay(3);
+	}
+	
+	@DataProvider(name = "statusInvalidWA")
+	public Object[][] statusInvalidWA() {
+		Object[][] myData = { 
+				{"Grand Am","Whatsapp","Tersambung","Diangkat","Tidak Berhasil","Tidak Berhasil" },
+				{"Grand Am","Whatsapp","Tersambung","Salah Sambung","Salah Sambung","Salah Sambung" },
+				{"Grand Am","Whatsapp","Tersambung","Tidak Diangkat","Tidak Diangkat","Tidak Diangkat" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Nomer Salah","Nomer Salah","Nomer Salah" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Mailbox","Mailbox","Mailbox" },
+				{"Grand Am","Whatsapp","Tidak Tersambung","Invalid Number","Tidak Ada Nomor Telepon","Tidak Ada Nomor Telepon" },
+				{"hei.boo","Whatsapp","Tidak Tersambung","Telepon Not Register","Tidak Terdaftar","Tidak Terdaftar" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 18, dataProvider="statusInvalidWA")
+	public void testFollowUpActivity_statusWA_invalid(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		followUpPage.clickTopTable();
+		delay(1);
+		followUpPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		followUpPage.clickSubmit();
+		delay(1);
+		followUpPage.clickYESPemberitahuan();
+		delay(1);
+		TaskDataAllPage allPage = followUpPage.clickTaskAll();
+		delay(1);
+		allPage.setSearchAll(nama);
+		delay(1);
+		allPage.clickStatus(reason);
+		delay(1);
+		allPage.clickSearchDataAll();
+		delay(1);
+		verifyDataInTable("(//tr)[43]", nama, reason);
+		delay(5);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
+		delay(3);
+	}
+	
+	@DataProvider(name = "statusEmpty")
+	public Object[][] statusEmpty() {
+		Object[][] myData = { 
+				{"Dakota Club","Call","Tersambung","Diangkat","","" },
+				{"Dakota Club","Call","Tersambung","","","" },
+				{"Dakota Club","Call","","","","" },
+				{"Dakota Club","Call","Tersambung","Diangkat","Setuju","" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 19, dataProvider="statusEmpty")
+	public void testFollowUpActivity_status_empty(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		followUpPage.clickTopTable();
+		delay(1);
+		followUpPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		followUpPage.clickSubmit();
+		delay(1);
+		assertEquals(followUpPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
+		delay(3);
+		followUpPage.clickClosePemberitahuanGagal();
+		delay(1);
+		followUpPage.closeFollowUpActivity();
+		delay(1);
+		followUpPage.clickBtnLogoutAtMain();
+		delay(1);
+		followUpPage.logout();
+		delay(2);
+	}
+	
+	@DataProvider(name = "statusEmptyWA")
+	public Object[][] statusEmptyWA() {
+		Object[][] myData = { 
+				{"Dakota Club","Whatsapp","Tersambung","Diangkat","","" },
+				{"Dakota Club","Whatsapp","Tersambung","","","" },
+				{"Dakota Club","Whatsapp","","","","" },
+				{"Dakota Club","Whatsapp","Tersambung","Diangkat","Setuju","" }
+		};
+		return myData;
+	}
+	
+	@Test(priority = 20, dataProvider="statusEmptyWA")
+	public void testFollowUpActivity_statusWA_empty(String nama,String channel, String status, String statusCall,
+			String statusResult, String reason) {
+		LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+		MainPage mainPage = loginPage.loginToMainPage();
+		delay(1);
+		mainPage.clickOKPopUpAfterLogin();
+		delay(1);
+		mainPage.clickTask();
+		delay(1);
+		TaskFollowUpPage followUpPage = mainPage.clickDataFollowUp();
+		delay(1);
+		followUpPage.searchDataFollowUp(nama);
+		delay(1);
+		followUpPage.clickTopTable();
+		delay(1);
+		followUpPage.clickStatus(channel,status,statusCall,statusResult,reason);
+		delay(1);
+		followUpPage.clickSubmit();
+		delay(1);
+		assertEquals(followUpPage.getTextPemberitahuanGagal(), "Status Result Wajib Diisi !");
+		delay(3);
+		followUpPage.clickClosePemberitahuanGagal();
+		delay(1);
+		followUpPage.closeFollowUpActivity();
+		delay(1);
 		followUpPage.clickBtnLogoutAtMain();
 		delay(1);
 		followUpPage.logout();

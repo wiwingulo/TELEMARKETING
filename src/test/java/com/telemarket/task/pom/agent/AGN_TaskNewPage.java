@@ -242,10 +242,10 @@ public class AGN_TaskNewPage extends AGN_MainPage {
 	@FindBy(xpath = "//option[@value='Tidak Tersambung']")
 	protected WebElement btnStatus_TidakTersambung;
 
-	@FindBy(xpath = "//option[@value='Nomer Salah']")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[1]")
 	protected WebElement btnStatusCall_NomerSalah;
 
-	@FindBy(xpath = "(//select[@id='tl_user_activity--53051_text'])[1]")
+	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[2]")
 	protected WebElement btnStatusResult_NomerSalah;
 
 	@FindBy(xpath = "(//option[@value='Nomer Salah'][normalize-space()='Nomer Salah'])[3]")

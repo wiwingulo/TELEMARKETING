@@ -560,7 +560,24 @@ public class TaskNewPage extends MainPage {
 	public void clickYESPemberitahuan() {
 		btnPemberitahuanYES.click();
 	}
+	
+	/////// PEMBERITAHUAN STATUS GAGAL ------------------------------
+	
+	@FindBy(id = "ui-id-21")
+	protected WebElement txtPemberitahuan;
 
+	public String getTextPemberitahuanGagal() {
+		return txtPemberitahuan.getText();
+	}
+	
+	@FindBy(xpath = "(//span[@class='ui-button-icon-primary ui-icon ui-icon-closethick'])[1]")
+	protected WebElement btnClosePemberitahuanGagal;
+
+	public void clickClosePemberitahuanGagal() {
+		btnClosePemberitahuanGagal.click();
+	}
+	
+	
 	/////// PAGINATION
 	/////// -----------------------------------------------------------------
 	@FindBy(xpath = "//option[@value='10']")
